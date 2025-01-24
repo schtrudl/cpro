@@ -1,0 +1,19 @@
+# Rewrite FPROSoC in chisel
+
+## Setting up environment/workflow
+
+Chisel is board independent, it generates SystemVerilog from chisel (scala) that is latter to be consumed by other FPGA tools (in our case Vivaldo) to generate bitstream for board.
+
+We want to keep all sources in single tree (so we will use chisel tree). Chisel will generates all final System verilog files that are put in target_sv directory (even if blackboxed they are just copied from resources), files are then loaded in Vivaldo as folder (make sure that "copy to project" is not checked, to prevent Vivaldo from vendoring sources)
+
+two step build process in chisel: compile scala then compile to verilog: <https://chipyard.readthedocs.io/en/stable/Customization/Incorporating-Verilog-Blocks.html#differences-between-hasblackboxpath-and-hasblackboxresource>, meaning that it's not that it's not that strongly typed (I am Rust programer myself). Its fitted on scala lang.
+
+Firstly I just imported all files from vaja6, create blackbox for main file and instantiate/connect blackbox in Top.scala. Then it was start to test whole workflow (creating vivaldo project run and test on board) and after all that we can really start, using top-down approach by incrementally rewriting modules into chisel and/or blackboxing them.
+
+## Blackboxes
+
+are like header files in C, they only define interface and are not type checked (mismatch between impl of modul and chisel blackbox will cause error in simulation/synthesis)
+
+## Known footguns
+
+- in verilog: `input  [15:0] sw` in chisel: `val led = Output(UInt(16.W))` not `val led = Output(UInt(15.W))`
