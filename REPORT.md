@@ -17,3 +17,7 @@ are like header files in C, they only define interface and are not type checked 
 ## Known footguns
 
 - in verilog: `input  [15:0] sw` in chisel: `val led = Output(UInt(16.W))` not `val led = Output(UInt(15.W))`
+
+## Know Vivaldo problems
+
+- associate ELF does not work correctly if MCS is not in top module

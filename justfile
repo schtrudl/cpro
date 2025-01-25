@@ -1,6 +1,7 @@
 set windows-shell := ["C:/Program Files/Git/bin/bash.exe", "-uc"]
 
 build:
+    rm -rf target_sv
     sbt run
     # vivaldo hates meta files
     rm ./target_sv/extern_modules.sv
