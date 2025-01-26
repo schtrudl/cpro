@@ -21,3 +21,4 @@ are like header files in C, they only define interface and are not type checked 
 ## Know Vivaldo problems
 
 - associate ELF does not work correctly if MCS is not in top module
+- vivaldo does not check folder for new files so folder needs to be reimported

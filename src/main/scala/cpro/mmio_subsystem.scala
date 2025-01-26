@@ -44,5 +44,8 @@ class mmio_subsystem extends BlackBox with HasBlackBoxResource {
   })
   addResource("/mmio_subsystem.sv")
   addResource("/mmio_controller.sv")
-  addResource("/mmio_cores.sv")
+  addResource("/mmio_cores/gpi.sv")
+  addResource("/mmio_cores/gpo.sv")
+  addResource("/mmio_cores/timer.sv")
+  addResource("/mmio_cores/sev_seg_display.sv")
 }
