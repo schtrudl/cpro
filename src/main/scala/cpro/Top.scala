@@ -83,6 +83,13 @@ object Top extends App {
   ChiselStage.emitSystemVerilogFile(
     new Top,
     Array("--split-verilog", "--target-dir", "target_sv/"),
-    firtoolOpts = Array("-disable-all-randomization", "-strip-debug-info")
+    firtoolOpts = Array(
+      "-disable-all-randomization",
+      "-strip-debug-info",
+      // These options are needed to properly handle packed arrays in verilog
+      "-preserve-aggregate=all",
+      "-scalarize-public-modules=false",
+      "-scalarize-ext-modules=false"
+    )
   )
 }

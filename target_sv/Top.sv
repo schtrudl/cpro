@@ -8,7 +8,7 @@ module Top(
   output [6:0]  segs
 );
 
-  wire [31:0] _mmioSubsystem_mmio_read_data;
+  wire [31:0] _mmioSubsystem_io_mmio_read_data;
   wire [31:0] _mcsBridge_io_read_data;
   wire        _mcsBridge_io_ready;
   wire        _mcsBridge_fp_mmio_cs;
@@ -49,21 +49,21 @@ module Top(
     .fp_rd           (_mcsBridge_fp_rd),
     .fp_addr         (_mcsBridge_fp_addr),
     .fp_wr_data      (_mcsBridge_fp_wr_data),
-    .fp_rd_data      (_mmioSubsystem_mmio_read_data)
+    .fp_rd_data      (_mmioSubsystem_io_mmio_read_data)
   );
   mmio_subsystem mmioSubsystem (
-    .clock           (clock),
-    .reset           (reset),
-    .mmio_cs         (_mcsBridge_fp_mmio_cs),
-    .mmio_address    (_mcsBridge_fp_addr),
-    .mmio_write_data (_mcsBridge_fp_wr_data),
-    .mmio_write      (_mcsBridge_fp_wr),
-    .mmio_read_data  (_mmioSubsystem_mmio_read_data),
-    .mmio_read       (_mcsBridge_fp_rd),
-    .data_in         (sw),
-    .data_out        (led),
-    .anode_assert    (anode_assert),
-    .segs            (segs)
+    .io_clock           (clock),
+    .io_reset           (reset),
+    .io_mmio_cs         (_mcsBridge_fp_mmio_cs),
+    .io_mmio_address    (_mcsBridge_fp_addr),
+    .io_mmio_write_data (_mcsBridge_fp_wr_data),
+    .io_mmio_write      (_mcsBridge_fp_wr),
+    .io_mmio_read_data  (_mmioSubsystem_io_mmio_read_data),
+    .io_mmio_read       (_mcsBridge_fp_rd),
+    .io_data_in         (sw),
+    .io_data_out        (led),
+    .io_anode_assert    (anode_assert),
+    .io_segs            (segs)
   );
 endmodule
 

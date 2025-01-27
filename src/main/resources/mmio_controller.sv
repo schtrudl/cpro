@@ -11,10 +11,10 @@ module mmio_controller (
     input logic mmio_read,
     // to the cores 
     output logic [63:0] slot_cs,
-    output logic [4:0] slot_reg_addr [63:0],
-    output logic [31:0] slot_write_data [63:0], // array 
+    output logic [63:0] [4:0] slot_reg_addr,
+    output logic [63:0] [31:0] slot_write_data, // array
     output logic [63:0] slot_write,
-    input logic [31:0] slot_read_data [63:0],
+    input logic [63:0] [31:0] slot_read_data,
     output logic [63:0] slot_read
 );
 

@@ -10,13 +10,19 @@ two step build process in chisel: compile scala then compile to verilog: <https:
 
 Firstly I just imported all files from vaja6, create blackbox for main file and instantiate/connect blackbox in Top.scala. Then it was start to test whole workflow (creating vivaldo project run and test on board) and after all that we can really start, using top-down approach by incrementally rewriting modules into chisel and/or blackboxing them.
 
+Blackbox -> Module and blackbox it's children
+
 ## Blackboxes
 
 are like header files in C, they only define interface and are not type checked (mismatch between impl of modul and chisel blackbox will cause error in simulation/synthesis)
 
-## Known footguns
+## Known chisel problems
 
 - in verilog: `input  [15:0] sw` in chisel: `val led = Output(UInt(16.W))` not `val led = Output(UInt(15.W))`
+- bad docs
+- unpacked array not supported, but we can use [packed arrays](https://verificationguide.com/systemverilog/systemverilog-packed-and-unpacked-array/) that only require magic options (again bad docs) `scalarize-ext-modules`
+
+not bug but a feature: all wires need to be connected, one can use `DontCare`
 
 ## Know Vivaldo problems
 
