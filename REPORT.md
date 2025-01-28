@@ -16,6 +16,22 @@ Blackbox -> Module and blackbox it's children
 
 are like header files in C, they only define interface and are not type checked (mismatch between impl of modul and chisel blackbox will cause error in simulation/synthesis)
 
+## Verilog -> chisel
+
+### slices
+
+| verilog | chisel |
+|---------|--------|
+| `a[15]` | `a(15)`|
+|`a[32:16]`| `a(32,16)`|
+
+### slices
+
+| verilog | chisel |
+|---------|--------|
+| `a[15]` | `a(15)`|
+|`a[32:16]`| `a(32,16)`|
+
 ## Known chisel problems
 
 - in verilog: `input  [15:0] sw` in chisel: `val led = Output(UInt(16.W))` not `val led = Output(UInt(15.W))`

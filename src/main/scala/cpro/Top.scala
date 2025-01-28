@@ -35,7 +35,7 @@ class Top extends Module {
   microblazeMCS.io.IO_write_data <> IO_write_data
   microblazeMCS.io.IO_write_strobe <> IO_write_strobe
 
-  val mcsBridge = Module(new mcs_bridge)
+  val mcsBridge = Module(new mcs_bridge("h_c000_0000".U))
   mcsBridge.io.io_address <> IO_address
   mcsBridge.io.io_addr_strobe <> IO_addr_strobe
   mcsBridge.io.io_write_data <> IO_write_data

@@ -9,13 +9,12 @@ module Top(
 );
 
   wire [31:0] _mmioSubsystem_io_mmio_read_data;
-  wire [31:0] _mcsBridge_io_read_data;
-  wire        _mcsBridge_io_ready;
-  wire        _mcsBridge_fp_mmio_cs;
-  wire        _mcsBridge_fp_wr;
-  wire        _mcsBridge_fp_rd;
-  wire [20:0] _mcsBridge_fp_addr;
-  wire [31:0] _mcsBridge_fp_wr_data;
+  wire [31:0] _mcsBridge_io_io_read_data;
+  wire        _mcsBridge_io_fp_mmio_cs;
+  wire        _mcsBridge_io_fp_wr;
+  wire        _mcsBridge_io_fp_rd;
+  wire [20:0] _mcsBridge_io_fp_addr;
+  wire [31:0] _mcsBridge_io_fp_wr_data;
   wire        _microblazeMCS_IO_addr_strobe;
   wire [31:0] _microblazeMCS_IO_address;
   wire [3:0]  _microblazeMCS_IO_byte_enable;
@@ -28,38 +27,37 @@ module Top(
     .IO_addr_strobe  (_microblazeMCS_IO_addr_strobe),
     .IO_address      (_microblazeMCS_IO_address),
     .IO_byte_enable  (_microblazeMCS_IO_byte_enable),
-    .IO_read_data    (_mcsBridge_io_read_data),
+    .IO_read_data    (_mcsBridge_io_io_read_data),
     .IO_read_strobe  (_microblazeMCS_IO_read_strobe),
-    .IO_ready        (_mcsBridge_io_ready),
+    .IO_ready        (1'h1),
     .IO_write_data   (_microblazeMCS_IO_write_data),
     .IO_write_strobe (_microblazeMCS_IO_write_strobe)
   );
   mcs_bridge mcsBridge (
-    .io_address      (_microblazeMCS_IO_address),
-    .io_addr_strobe  (_microblazeMCS_IO_addr_strobe),
-    .io_write_data   (_microblazeMCS_IO_write_data),
-    .io_write_strobe (_microblazeMCS_IO_write_strobe),
-    .io_byte_enable  (_microblazeMCS_IO_byte_enable),
-    .io_read_data    (_mcsBridge_io_read_data),
-    .io_read_strobe  (_microblazeMCS_IO_read_strobe),
-    .io_ready        (_mcsBridge_io_ready),
-    .fp_video_cs     (/* unused */),
-    .fp_mmio_cs      (_mcsBridge_fp_mmio_cs),
-    .fp_wr           (_mcsBridge_fp_wr),
-    .fp_rd           (_mcsBridge_fp_rd),
-    .fp_addr         (_mcsBridge_fp_addr),
-    .fp_wr_data      (_mcsBridge_fp_wr_data),
-    .fp_rd_data      (_mmioSubsystem_io_mmio_read_data)
+    .io_io_address      (_microblazeMCS_IO_address),
+    .io_io_addr_strobe  (_microblazeMCS_IO_addr_strobe),
+    .io_io_write_data   (_microblazeMCS_IO_write_data),
+    .io_io_write_strobe (_microblazeMCS_IO_write_strobe),
+    .io_io_byte_enable  (_microblazeMCS_IO_byte_enable),
+    .io_io_read_data    (_mcsBridge_io_io_read_data),
+    .io_io_read_strobe  (_microblazeMCS_IO_read_strobe),
+    .io_fp_video_cs     (/* unused */),
+    .io_fp_mmio_cs      (_mcsBridge_io_fp_mmio_cs),
+    .io_fp_wr           (_mcsBridge_io_fp_wr),
+    .io_fp_rd           (_mcsBridge_io_fp_rd),
+    .io_fp_addr         (_mcsBridge_io_fp_addr),
+    .io_fp_wr_data      (_mcsBridge_io_fp_wr_data),
+    .io_fp_rd_data      (_mmioSubsystem_io_mmio_read_data)
   );
   mmio_subsystem mmioSubsystem (
     .io_clock           (clock),
     .io_reset           (reset),
-    .io_mmio_cs         (_mcsBridge_fp_mmio_cs),
-    .io_mmio_address    (_mcsBridge_fp_addr),
-    .io_mmio_write_data (_mcsBridge_fp_wr_data),
-    .io_mmio_write      (_mcsBridge_fp_wr),
+    .io_mmio_cs         (_mcsBridge_io_fp_mmio_cs),
+    .io_mmio_address    (_mcsBridge_io_fp_addr),
+    .io_mmio_write_data (_mcsBridge_io_fp_wr_data),
+    .io_mmio_write      (_mcsBridge_io_fp_wr),
     .io_mmio_read_data  (_mmioSubsystem_io_mmio_read_data),
-    .io_mmio_read       (_mcsBridge_fp_rd),
+    .io_mmio_read       (_mcsBridge_io_fp_rd),
     .io_data_in         (sw),
     .io_data_out        (led),
     .io_anode_assert    (anode_assert),
