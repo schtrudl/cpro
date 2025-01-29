@@ -90,8 +90,8 @@ class mmio_subsystem extends Module {
 
   // Instantiate the Timer
   val timer = Module(new timer())
-  timer.io.clock <> clock
-  timer.io.reset <> reset
+  timer.clock <> clock
+  timer.reset <> reset
   timer.io.address <> slotRegAddr(2)
   timer.io.rd_data <> slotReadData(2)
   timer.io.wr_data <> slotWriteData(2)

@@ -22,12 +22,15 @@ no support for subword assignments, always need to use cat
 
 no concept of logic (typified) you need reg or wire
 
-### slices
+### init
 
 | verilog | chisel |
 |---------|--------|
-| `a[15]` | `a(15)`|
-|`a[32:16]`| `a(32,16)`|
+| `logic a;` | / |
+|`wire a;`| `val a = Wire(/*type*/)`|
+|`reg a;`| `val a = Reg(/*type*/)`|
+|| `val a = RegInit(r.U(w.W))`|
+|| `val a = RegNext(/*TODO*/)`|
 
 ### slices
 
