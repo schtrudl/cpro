@@ -3,6 +3,7 @@ module SevSegDisplay_core(
   input         clock,
                 reset,
   input  [4:0]  io_address,
+  output [31:0] io_rd_data,
   input  [31:0] io_wr_data,
   input         io_read,
                 io_write,
@@ -11,8 +12,10 @@ module SevSegDisplay_core(
   output [6:0]  io_segs
 );
 
-  reg [31:0] config_reg;
-  reg [31:0] display_data;
+  reg  [31:0] config_reg;
+  wire        _GEN = io_address == 5'h0;
+  reg  [31:0] display_data;
+  wire        _GEN_0 = io_address == 5'h1;
   always @(posedge clock) begin
     if (reset) begin
       config_reg <= 32'h0;
@@ -20,9 +23,9 @@ module SevSegDisplay_core(
     end
     else begin
       automatic logic wr_en = io_write & io_cs;
-      if (wr_en & io_address == 5'h0)
+      if (_GEN & wr_en)
         config_reg <= io_wr_data;
-      if (wr_en & io_address == 5'h1)
+      if (_GEN_0 & wr_en)
         display_data <= io_wr_data;
     end
   end // always @(posedge)
@@ -34,5 +37,6 @@ module SevSegDisplay_core(
     .io_anode_select (io_anode_select),
     .io_segs         (io_segs)
   );
+  assign io_rd_data = _GEN_0 ? display_data : _GEN ? config_reg : 32'h0;
 endmodule
 

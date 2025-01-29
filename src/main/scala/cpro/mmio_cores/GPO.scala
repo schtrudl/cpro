@@ -46,5 +46,5 @@ class GPO extends Module {
   // copy the buf_gpo to out
   io.data_out := buf_gpo
 
-  io.rd_data := DontCare
+  io.rd_data := buf_gpo
 }

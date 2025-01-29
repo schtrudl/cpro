@@ -14,8 +14,10 @@ module mmio_subsystem(
   output [6:0]  io_segs
 );
 
+  wire [31:0]       _sevenSegDisplay_io_rd_data;
   wire [31:0]       _timer_io_rd_data;
   wire [31:0]       _gpi_io_rd_data;
+  wire [31:0]       _gpo_io_rd_data;
   wire [63:0]       _mmioController_io_slot_cs;
   wire [63:0][4:0]  _mmioController_io_slot_reg_addr;
   wire [63:0][31:0] _mmioController_io_slot_write_data;
@@ -93,16 +95,17 @@ module mmio_subsystem(
         {32'hFFFFFFFF},
         {32'hFFFFFFFF},
         {32'hFFFFFFFF},
-        {32'h0},
+        {_sevenSegDisplay_io_rd_data},
         {_timer_io_rd_data},
         {_gpi_io_rd_data},
-        {32'h0}}),
+        {_gpo_io_rd_data}}),
     .io_slot_read       (_mmioController_io_slot_read)
   );
   GPO gpo (
     .clock       (clock),
     .reset       (reset),
     .io_address  (_mmioController_io_slot_reg_addr[6'h0]),
+    .io_rd_data  (_gpo_io_rd_data),
     .io_wr_data  (_mmioController_io_slot_write_data[6'h0]),
     .io_read     (_mmioController_io_slot_read[0]),
     .io_write    (_mmioController_io_slot_write[0]),
@@ -134,6 +137,7 @@ module mmio_subsystem(
     .clock           (clock),
     .reset           (reset),
     .io_address      (_mmioController_io_slot_reg_addr[6'h3]),
+    .io_rd_data      (_sevenSegDisplay_io_rd_data),
     .io_wr_data      (_mmioController_io_slot_write_data[6'h3]),
     .io_read         (_mmioController_io_slot_read[3]),
     .io_write        (_mmioController_io_slot_write[3]),

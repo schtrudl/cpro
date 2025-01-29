@@ -36,22 +36,28 @@ class SevSegDisplay_core extends Module {
     val segs = Output(UInt(7.W))
   })
 
-  io.rd_data := DontCare
+  io.rd_data := 0.U
 
   val wr_en: Bool = (io.write & io.cs)
 
   val config_reg = RegInit(0.U(32.W))
 
-  when(wr_en & (io.address === "h00".U)) {
-    config_reg := io.wr_data
+  when(io.address === "h00".U) {
+    io.rd_data := config_reg
+    when(wr_en) {
+      config_reg := io.wr_data
+    }
   }
 
   val enable_7seg = config_reg(0)
 
   val display_data = RegInit(0.U(32.W))
 
-  when(wr_en & (io.address === "h01".U)) {
-    display_data := io.wr_data
+  when(io.address === "h01".U) {
+    io.rd_data := display_data
+    when(wr_en) {
+      display_data := io.wr_data
+    }
   }
 
   val seg7 = Module(new SevSegDisplay())
@@ -115,7 +121,7 @@ class SevSegDisplay extends Module {
   }
 
   //    digit_to_segments
-  io.segs := DontCare
+  io.segs := DontCare // this should not be needed but apparently chisel does not do completeness check
   switch(digit) {
     is("b0000".U) { io.segs := "b1000000".U } // 0
     is("b0001".U) { io.segs := "b1111001".U } // 1

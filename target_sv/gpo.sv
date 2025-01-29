@@ -3,6 +3,7 @@ module GPO(
   input         clock,
                 reset,
   input  [4:0]  io_address,
+  output [31:0] io_rd_data,
   input  [31:0] io_wr_data,
   input         io_read,
                 io_write,
@@ -17,6 +18,7 @@ module GPO(
     else if (io_write & io_cs)
       buf_gpo <= io_wr_data[15:0];
   end // always @(posedge)
+  assign io_rd_data = {16'h0, buf_gpo};
   assign io_data_out = buf_gpo;
 endmodule
 

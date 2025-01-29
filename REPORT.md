@@ -51,4 +51,5 @@ not bug but a feature: all wires need to be connected, one can use `DontCare`
 ## Know Vivaldo problems
 
 - associate ELF does not work correctly if MCS is not in top module
-- vivaldo does not check folder for new files so folder needs to be reimported
+- vivaldo does not check folder for new files so folder needs to be reimported7
+- sometimes changes are not detected (generate bitstream uses old files)
