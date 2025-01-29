@@ -50,8 +50,8 @@ module Top(
     .io_fp_rd_data      (_mmioSubsystem_io_mmio_read_data)
   );
   mmio_subsystem mmioSubsystem (
-    .io_clock           (clock),
-    .io_reset           (reset),
+    .clock              (clock),
+    .reset              (reset),
     .io_mmio_cs         (_mcsBridge_io_fp_mmio_cs),
     .io_mmio_address    (_mcsBridge_io_fp_addr),
     .io_mmio_write_data (_mcsBridge_io_fp_wr_data),

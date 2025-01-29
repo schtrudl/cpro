@@ -1,7 +1,9 @@
 package cpro.mmio_cores
 
 import chisel3._
+import chisel3.Reg
 import chisel3.util.HasBlackBoxResource
+import chisel3.util.Cat
 
 /*
 // clock and reset
@@ -18,12 +20,8 @@ import chisel3.util.HasBlackBoxResource
     input logic [15:0]  data_in
  */
 
-class GPI extends BlackBox with HasBlackBoxResource {
+class GPI extends Module {
   val io = IO(new Bundle {
-    // Clock and reset
-    val clock = Input(Clock())
-    val reset = Input(Reset())
-
     // slot interface
     val address = Input(UInt(5.W))
     val rd_data = Output(UInt(32.W))
@@ -35,5 +33,8 @@ class GPI extends BlackBox with HasBlackBoxResource {
     // external signal
     val data_in = Input(UInt(16.W))
   })
-  addResource("/mmio_cores/gpi.sv")
+  val buf_in = RegInit(0.U(32.W))
+  buf_in := Cat(0.U, io.data_in)
+
+  io.rd_data := buf_in
 }

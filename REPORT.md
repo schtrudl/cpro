@@ -18,6 +18,10 @@ are like header files in C, they only define interface and are not type checked 
 
 ## Verilog -> chisel
 
+no support for subword assignments, always need to use cat
+
+no concept of logic (typified) you need reg or wire
+
 ### slices
 
 | verilog | chisel |

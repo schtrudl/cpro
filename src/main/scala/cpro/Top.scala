@@ -64,8 +64,8 @@ class Top extends Module {
 
   // Instantiate the MMIO Subsystem (BlackBox)
   val mmioSubsystem = Module(new mmio_subsystem)
-  mmioSubsystem.io.clock <> clock
-  mmioSubsystem.io.reset <> reset
+  mmioSubsystem.clock <> clock
+  mmioSubsystem.reset <> reset
   mmioSubsystem.io.mmio_cs <> fp_mmio_cs
   mmioSubsystem.io.mmio_address <> fp_addr
   mmioSubsystem.io.mmio_write_data <> fp_wr_data
