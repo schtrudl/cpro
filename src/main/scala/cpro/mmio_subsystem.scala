@@ -49,8 +49,8 @@ class mmio_subsystem extends Module {
 
   // Instantiate the mmio_controller
   val mmioController = Module(new mmio_controller())
-  mmioController.io.clock <> clock
-  mmioController.io.reset <> reset
+  mmioController.clock <> clock
+  mmioController.reset <> reset
   mmioController.io.mmio_cs <> io.mmio_cs
   mmioController.io.mmio_address <> io.mmio_address
   mmioController.io.mmio_write_data <> io.mmio_write_data

@@ -1,7 +1,7 @@
 package cpro
 
 import chisel3._
-import chisel3.util.HasBlackBoxResource
+import chisel3.util.Fill
 
 /*
 //
@@ -23,12 +23,8 @@ import chisel3.util.HasBlackBoxResource
     output logic [63:0] slot_read
  */
 
-class mmio_controller extends BlackBox with HasBlackBoxResource {
+class mmio_controller extends Module {
   val io = IO(new Bundle {
-    // Clock and reset
-    val clock = Input(Clock())
-    val reset = Input(Reset())
-
     // From fpro bridge
     val mmio_cs = Input(Bool())
     val mmio_address =
@@ -47,5 +43,31 @@ class mmio_controller extends BlackBox with HasBlackBoxResource {
     val slot_read_data = Input(Vec(64, UInt(32.W))) // Array of 64, each 32-bit
     val slot_read = Output(UInt(64.W)) // 64-bit signal
   })
-  addResource("/mmio_controller.sv")
+
+  // module and register address
+  val reg_addr = io.mmio_address(4, 0) // last 5 bits
+  val slot_addr = io.mmio_address(10, 5)
+
+  // decode interface
+
+  // generate chip select signal
+  io.slot_cs := 0.U
+  when(io.mmio_cs) {
+    io.slot_cs := (1.U << slot_addr)
+  }
+
+  // broadcast everything
+  for (i <- 0 until 64) {
+    io.slot_reg_addr(i) := reg_addr
+    io.slot_write_data(i) := io.mmio_write_data
+  }
+  io.slot_write := Fill(64, io.mmio_write)
+
+  // read data interface
+  io.mmio_read_data := 0.U
+  when(io.mmio_read) {
+    io.mmio_read_data := io.slot_read_data(slot_addr)
+  }
+
+  io.slot_read := Fill(64, io.mmio_read)
 }

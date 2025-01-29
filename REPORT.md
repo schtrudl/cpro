@@ -44,6 +44,7 @@ no concept of logic (typified) you need reg or wire
 - in verilog: `input  [15:0] sw` in chisel: `val led = Output(UInt(16.W))` not `val led = Output(UInt(15.W))`
 - bad docs
 - unpacked array not supported, but we can use [packed arrays](https://verificationguide.com/systemverilog/systemverilog-packed-and-unpacked-array/) that only require magic options (again bad docs) `scalarize-ext-modules`
+- sizes are not really typed (they are checked in lowering)
 
 not bug but a feature: all wires need to be connected, one can use `DontCare`
 
