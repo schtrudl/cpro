@@ -14,7 +14,6 @@ module mmio_subsystem(
   output [6:0]  io_segs
 );
 
-  wire [31:0]       _sevenSegDisplay_rd_data;
   wire [31:0]       _timer_io_rd_data;
   wire [31:0]       _gpi_io_rd_data;
   wire [63:0]       _mmioController_io_slot_cs;
@@ -94,7 +93,7 @@ module mmio_subsystem(
         {32'hFFFFFFFF},
         {32'hFFFFFFFF},
         {32'hFFFFFFFF},
-        {_sevenSegDisplay_rd_data},
+        {32'h0},
         {_timer_io_rd_data},
         {_gpi_io_rd_data},
         {32'h0}}),
@@ -132,16 +131,15 @@ module mmio_subsystem(
     .io_cs      (_mmioController_io_slot_cs[2])
   );
   SevSegDisplay_core sevenSegDisplay (
-    .clock        (clock),
-    .reset        (reset),
-    .address      (_mmioController_io_slot_reg_addr[6'h3]),
-    .rd_data      (_sevenSegDisplay_rd_data),
-    .wr_data      (_mmioController_io_slot_write_data[6'h3]),
-    .read         (_mmioController_io_slot_read[3]),
-    .write        (_mmioController_io_slot_write[3]),
-    .cs           (_mmioController_io_slot_cs[3]),
-    .anode_select (io_anode_assert),
-    .segs         (io_segs)
+    .clock           (clock),
+    .reset           (reset),
+    .io_address      (_mmioController_io_slot_reg_addr[6'h3]),
+    .io_wr_data      (_mmioController_io_slot_write_data[6'h3]),
+    .io_read         (_mmioController_io_slot_read[3]),
+    .io_write        (_mmioController_io_slot_write[3]),
+    .io_cs           (_mmioController_io_slot_cs[3]),
+    .io_anode_select (io_anode_assert),
+    .io_segs         (io_segs)
   );
 endmodule
 

@@ -31,6 +31,7 @@ class timer extends Module {
   val clear = Wire(Bool())
   val go = Wire(Bool())
 
+  // this could be done with chisel3.util.Counter, but then we would need to set limit manually ...
   val count = RegInit(0.U(64.W))
   when(clear) {
     count := 0.U

@@ -6,7 +6,7 @@ build:
     # vivaldo hates meta files
     rm ./target_sv/extern_modules.sv
     rm ./target_sv/filelist.f
-    rm ./target_sv/firrtl_black_box_resource_files.f
+    rm ./target_sv/firrtl_black_box_resource_files.f || exit 0
 
 test:
     sbt test

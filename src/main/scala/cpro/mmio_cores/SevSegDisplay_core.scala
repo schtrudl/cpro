@@ -1,7 +1,9 @@
 package cpro.mmio_cores
 
 import chisel3._
-import chisel3.util.HasBlackBoxResource
+import chisel3.util.Counter
+import chisel3.util.switch
+import chisel3.util.is
 
 /*
   // clock and reset
@@ -19,12 +21,8 @@ import chisel3.util.HasBlackBoxResource
     output logic [6:0] segs
  */
 
-class SevSegDisplay_core extends BlackBox with HasBlackBoxResource {
+class SevSegDisplay_core extends Module {
   val io = IO(new Bundle {
-    // Clock and reset
-    val clock = Input(Clock())
-    val reset = Input(Reset())
-
     // slot interface
     val address = Input(UInt(5.W))
     val rd_data = Output(UInt(32.W))
@@ -37,5 +35,103 @@ class SevSegDisplay_core extends BlackBox with HasBlackBoxResource {
     val anode_select = Output(UInt(8.W))
     val segs = Output(UInt(7.W))
   })
-  addResource("/mmio_cores/sev_seg_display.sv")
+
+  io.rd_data := DontCare
+
+  val wr_en: Bool = (io.write & io.cs)
+
+  val config_reg = RegInit(0.U(32.W))
+
+  when(wr_en & (io.address === "h00".U)) {
+    config_reg := io.wr_data
+  }
+
+  val enable_7seg = config_reg(0)
+
+  val display_data = RegInit(0.U(32.W))
+
+  when(wr_en & (io.address === "h01".U)) {
+    display_data := io.wr_data
+  }
+
+  val seg7 = Module(new SevSegDisplay())
+  seg7.clock <> clock
+  seg7.reset <> reset
+  seg7.io.enable_7seg <> enable_7seg
+  seg7.io.display_data <> display_data
+  seg7.io.anode_select <> io.anode_select
+  seg7.io.segs <> io.segs
+}
+
+class SevSegDisplay extends Module {
+  val io = IO(new Bundle {
+    val enable_7seg = Input(Bool())
+    val display_data = Input(UInt(32.W))
+    // external signal
+    val anode_select = Output(UInt(8.W))
+    val segs = Output(UInt(7.W))
+  })
+
+  val (_, anode_prescaler) =
+    Counter(0 until 40000, io.enable_7seg, reset.asBool)
+
+  //    anode assert/select
+  val (count, _) = Counter(0 until 8, anode_prescaler, reset.asBool)
+  when(io.enable_7seg) {
+    io.anode_select := ~(1.U << count)
+  }.otherwise {
+    io.anode_select := ~0.U
+  }
+
+  //    value_to_digit
+
+  val digit = Wire(UInt(4.W))
+  digit := "b0000".U
+  switch(~io.anode_select) {
+    is("h01".U) {
+      digit := io.display_data(3, 0)
+    }
+    is("h02".U) {
+      digit := io.display_data(7, 4)
+    }
+    is("h04".U) {
+      digit := io.display_data(11, 8)
+    }
+    is("h08".U) {
+      digit := io.display_data(15, 12)
+    }
+    is("h10".U) {
+      digit := io.display_data(19, 16)
+    }
+    is("h20".U) {
+      digit := io.display_data(23, 20)
+    }
+    is("h40".U) {
+      digit := io.display_data(27, 24)
+    }
+    is("h80".U) {
+      digit := io.display_data(31, 28)
+    }
+  }
+
+  //    digit_to_segments
+  io.segs := DontCare
+  switch(digit) {
+    is("b0000".U) { io.segs := "b1000000".U } // 0
+    is("b0001".U) { io.segs := "b1111001".U } // 1
+    is("b0010".U) { io.segs := "b0100100".U } // 2
+    is("b0011".U) { io.segs := "b0110000".U } // 3
+    is("b0100".U) { io.segs := "b0011001".U } // 4
+    is("b0101".U) { io.segs := "b0010010".U } // 5
+    is("b0110".U) { io.segs := "b0000010".U } // 6
+    is("b0111".U) { io.segs := "b1111000".U } // 7
+    is("b1000".U) { io.segs := "b0000000".U } // 8
+    is("b1001".U) { io.segs := "b0010000".U } // 9
+    is("b1010".U) { io.segs := "b0001000".U } // A
+    is("b1011".U) { io.segs := "b0000011".U } // b
+    is("b1100".U) { io.segs := "b1000110".U } // C
+    is("b1101".U) { io.segs := "b0100001".U } // d
+    is("b1110".U) { io.segs := "b0000110".U } // E
+    is("b1111".U) { io.segs := "b0001110".U } // F
+  }
 }

@@ -101,8 +101,8 @@ class mmio_subsystem extends Module {
 
   // Instantiate the Seven Segment Display
   val sevenSegDisplay = Module(new SevSegDisplay_core())
-  sevenSegDisplay.io.clock <> clock
-  sevenSegDisplay.io.reset <> reset
+  sevenSegDisplay.clock <> clock
+  sevenSegDisplay.reset <> reset
   sevenSegDisplay.io.address <> slotRegAddr(3)
   sevenSegDisplay.io.rd_data <> slotReadData(3)
   sevenSegDisplay.io.wr_data <> slotWriteData(3)
