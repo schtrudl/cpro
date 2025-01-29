@@ -1,7 +1,6 @@
 package cpro.mmio_cores
 
 import chisel3._
-import chisel3.util.HasBlackBoxResource
 
 /*
 // clock and reset
@@ -18,12 +17,8 @@ import chisel3.util.HasBlackBoxResource
     output logic [15:0]  data_out
  */
 
-class GPO extends BlackBox with HasBlackBoxResource {
+class GPO extends Module {
   val io = IO(new Bundle {
-    // Clock and reset
-    val clock = Input(Clock())
-    val reset = Input(Reset())
-
     // slot interface
     val address = Input(UInt(5.W))
     val rd_data = Output(UInt(32.W))
@@ -35,5 +30,21 @@ class GPO extends BlackBox with HasBlackBoxResource {
     // external signal
     val data_out = Output(UInt(16.W))
   })
-  addResource("/mmio_cores/gpo.sv")
+
+  // define register for GPO device
+  val buf_gpo = RegInit(0.U(16.W))
+
+  // decoding logic
+  // there is only one register, so we do not need address signal
+  val wr_en: Bool = (io.write & io.cs)
+
+  when(wr_en) {
+    // implicit subslice
+    buf_gpo := io.wr_data // (15,0)
+  }
+
+  // copy the buf_gpo to out
+  io.data_out := buf_gpo
+
+  io.rd_data := DontCare
 }

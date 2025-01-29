@@ -66,8 +66,8 @@ class mmio_subsystem extends Module {
 
   // Instantiate the GPO (General Purpose Output)
   val gpo = Module(new GPO())
-  gpo.io.clock <> clock
-  gpo.io.reset <> reset
+  gpo.clock <> clock
+  gpo.reset <> reset
   gpo.io.address <> slotRegAddr(0)
   gpo.io.rd_data <> slotReadData(0)
   gpo.io.wr_data <> slotWriteData(0)
