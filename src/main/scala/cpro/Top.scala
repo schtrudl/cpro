@@ -22,7 +22,7 @@ class Top extends Module {
   val IO_write_data = Wire(UInt(32.W))
   val IO_write_strobe = Wire(Bool())
 
-  // Instantiate the MicroBlaze MCS Module (BlackBox)
+  // Instantiate the MicroBlaze MCS Module
   val microblazeMCS = Module(new microblaze_mcs_0)
   microblazeMCS.io.Clk <> clock
   microblazeMCS.io.Reset <> reset
@@ -62,7 +62,7 @@ class Top extends Module {
   mcsBridge.io.fp_wr_data <> fp_wr_data
   mcsBridge.io.fp_rd_data <> fp_rd_data
 
-  // Instantiate the MMIO Subsystem (BlackBox)
+  // Instantiate the MMIO Subsystem
   val mmioSubsystem = Module(new mmio_subsystem)
   mmioSubsystem.clock <> clock
   mmioSubsystem.reset <> reset

@@ -1,5 +1,3 @@
-// See README.md for license details.
-
 package cpro
 
 import chisel3._
