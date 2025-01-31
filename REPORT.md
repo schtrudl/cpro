@@ -1,5 +1,33 @@
 # Rewrite FPROSoC in chisel
 
+Chisel is technically not a new language but a library written in and for Scala (domain specific language (DSL) for describing hardware circuits embedded in Scala), but given it's special use and operators it's often described as open-source hardware description language.
+
+TODO: What exactly is HW gen / history of HW gen -- simple java/python scripts that did only string manipulation; what is RTL
+
+## Chisel to Verilog
+
+```mermaid
+flowchart TD;
+    Chisel--Scala compiler-->j[Java Executable]--elaboration-->CHIRRTL
+    subgraph CIRCT
+    CHIRRTL--SFC-->FIRRTL--transformations-->FIRRTL-->MLIR-->SystemVerilog
+    end
+```
+
+### Compilation
+
+Chisel gets compiled (as Scala) to JVM, which is then executed (this is usually done by `sbt run` command).
+
+### Elaboration
+
+Is execution on chisel compiled program, which during construction of main class (and it's subsequent classes) add hardware AST (CHIRRTL) to `ChiselStage`. Each `Module` class gets compiled separately (and it will get lowered into separate SystemVerilog module).
+
+TODO: non-modules are simpl scala code that inserts HW node x times and more of this stuff. maybe an example; show CHIRRTL
+
+### Circuit IR Compilers and Tools
+
+Scala FIRRTL (SFC) lowers CHIRRTL to FIRRTL, on which FIRRTL compilers apply some transformations (optimizations; ex: for unused signals) and lower it to MLIR that get optimized further and compiled into targeted language (usually SystemVerilog).
+
 ## Setting up environment/workflow
 
 Chisel is board independent, it generates SystemVerilog from chisel (scala) that is latter to be consumed by other FPGA tools (in our case Vivaldo) to generate bitstream for board.
@@ -53,3 +81,11 @@ not bug but a feature: all wires need to be connected, one can use `DontCare`
 - associate ELF does not work correctly if MCS is not in top module
 - vivaldo does not check folder for new files so folder needs to be reimported7
 - sometimes changes are not detected (generate bitstream uses old files)
+
+### Sources
+
+- <https://www.researchgate.net/publication/383664706_Hardware_Generators_with_Chisel>
+- <https://circt.llvm.org/>
+- <https://stackoverflow.com/questions/44548198/chisel-code-transformation>
+- <https://chipyard.readthedocs.io/en/stable/Tools/index.html>
+- <https://chipyard.readthedocs.io/en/stable/Customization/Firrtl-Transforms.html>
