@@ -14,10 +14,12 @@ module mmio_subsystem(
   output [6:0]  io_segs
 );
 
-  wire [31:0]       _sevenSegDisplay_io_rd_data;
-  wire [31:0]       _timer_io_rd_data;
-  wire [31:0]       _gpi_io_rd_data;
-  wire [31:0]       _gpo_io_rd_data;
+  wire [31:0]       _sevenSegDisplay_slot_io_rd_data;
+  wire struct packed {logic [7:0] anode_select; logic [6:0] segs; } _sevenSegDisplay_io;
+  wire [31:0]       _timer_slot_io_rd_data;
+  wire [31:0]       _gpi_slot_io_rd_data;
+  wire [31:0]       _gpo_slot_io_rd_data;
+  wire struct packed {logic [15:0] data_out; } _gpo_io;
   wire [63:0]       _mmioController_io_slot_cs;
   wire [63:0][4:0]  _mmioController_io_slot_reg_addr;
   wire [63:0][31:0] _mmioController_io_slot_write_data;
@@ -95,55 +97,57 @@ module mmio_subsystem(
         {32'hFFFFFFFF},
         {32'hFFFFFFFF},
         {32'hFFFFFFFF},
-        {_sevenSegDisplay_io_rd_data},
-        {_timer_io_rd_data},
-        {_gpi_io_rd_data},
-        {_gpo_io_rd_data}}),
+        {_sevenSegDisplay_slot_io_rd_data},
+        {_timer_slot_io_rd_data},
+        {_gpi_slot_io_rd_data},
+        {_gpo_slot_io_rd_data}}),
     .io_slot_read       (_mmioController_io_slot_read)
   );
   GPO gpo (
-    .clock       (clock),
-    .reset       (reset),
-    .io_address  (_mmioController_io_slot_reg_addr[6'h0]),
-    .io_rd_data  (_gpo_io_rd_data),
-    .io_wr_data  (_mmioController_io_slot_write_data[6'h0]),
-    .io_read     (_mmioController_io_slot_read[0]),
-    .io_write    (_mmioController_io_slot_write[0]),
-    .io_cs       (_mmioController_io_slot_cs[0]),
-    .io_data_out (io_data_out)
+    .clock           (clock),
+    .reset           (reset),
+    .slot_io_address (_mmioController_io_slot_reg_addr[6'h0]),
+    .slot_io_rd_data (_gpo_slot_io_rd_data),
+    .slot_io_wr_data (_mmioController_io_slot_write_data[6'h0]),
+    .slot_io_read    (_mmioController_io_slot_read[0]),
+    .slot_io_write   (_mmioController_io_slot_write[0]),
+    .slot_io_cs      (_mmioController_io_slot_cs[0]),
+    .io              (_gpo_io)
   );
   GPI gpi (
-    .clock      (clock),
-    .reset      (reset),
-    .io_address (_mmioController_io_slot_reg_addr[6'h1]),
-    .io_rd_data (_gpi_io_rd_data),
-    .io_wr_data (_mmioController_io_slot_write_data[6'h1]),
-    .io_read    (_mmioController_io_slot_read[1]),
-    .io_write   (_mmioController_io_slot_write[1]),
-    .io_cs      (_mmioController_io_slot_cs[1]),
-    .io_data_in (io_data_in)
+    .clock           (clock),
+    .reset           (reset),
+    .slot_io_address (_mmioController_io_slot_reg_addr[6'h1]),
+    .slot_io_rd_data (_gpi_slot_io_rd_data),
+    .slot_io_wr_data (_mmioController_io_slot_write_data[6'h1]),
+    .slot_io_read    (_mmioController_io_slot_read[1]),
+    .slot_io_write   (_mmioController_io_slot_write[1]),
+    .slot_io_cs      (_mmioController_io_slot_cs[1]),
+    .io_data_in      (io_data_in)
   );
   timer timer (
-    .clock      (clock),
-    .reset      (reset),
-    .io_address (_mmioController_io_slot_reg_addr[6'h2]),
-    .io_rd_data (_timer_io_rd_data),
-    .io_wr_data (_mmioController_io_slot_write_data[6'h2]),
-    .io_read    (_mmioController_io_slot_read[2]),
-    .io_write   (_mmioController_io_slot_write[2]),
-    .io_cs      (_mmioController_io_slot_cs[2])
+    .clock           (clock),
+    .reset           (reset),
+    .slot_io_address (_mmioController_io_slot_reg_addr[6'h2]),
+    .slot_io_rd_data (_timer_slot_io_rd_data),
+    .slot_io_wr_data (_mmioController_io_slot_write_data[6'h2]),
+    .slot_io_read    (_mmioController_io_slot_read[2]),
+    .slot_io_write   (_mmioController_io_slot_write[2]),
+    .slot_io_cs      (_mmioController_io_slot_cs[2])
   );
   SevSegDisplay_core sevenSegDisplay (
     .clock           (clock),
     .reset           (reset),
-    .io_address      (_mmioController_io_slot_reg_addr[6'h3]),
-    .io_rd_data      (_sevenSegDisplay_io_rd_data),
-    .io_wr_data      (_mmioController_io_slot_write_data[6'h3]),
-    .io_read         (_mmioController_io_slot_read[3]),
-    .io_write        (_mmioController_io_slot_write[3]),
-    .io_cs           (_mmioController_io_slot_cs[3]),
-    .io_anode_select (io_anode_assert),
-    .io_segs         (io_segs)
+    .slot_io_address (_mmioController_io_slot_reg_addr[6'h3]),
+    .slot_io_rd_data (_sevenSegDisplay_slot_io_rd_data),
+    .slot_io_wr_data (_mmioController_io_slot_write_data[6'h3]),
+    .slot_io_read    (_mmioController_io_slot_read[3]),
+    .slot_io_write   (_mmioController_io_slot_write[3]),
+    .slot_io_cs      (_mmioController_io_slot_cs[3]),
+    .io              (_sevenSegDisplay_io)
   );
+  assign io_data_out = _gpo_io.data_out;
+  assign io_anode_assert = _sevenSegDisplay_io.anode_select;
+  assign io_segs = _sevenSegDisplay_io.segs;
 endmodule
 

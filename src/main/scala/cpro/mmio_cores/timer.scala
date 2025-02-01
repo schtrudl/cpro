@@ -3,6 +3,7 @@ package cpro.mmio_cores
 import chisel3._
 import chisel3.util.switch
 import chisel3.util.is
+import cpro.Slot
 
 /*
   // clock and reset
@@ -18,15 +19,9 @@ import chisel3.util.is
  */
 
 class timer extends Module {
-  val io = IO(new Bundle {
-    // slot interface
-    val address = Input(UInt(5.W))
-    val rd_data = Output(UInt(32.W))
-    val wr_data = Input(UInt(32.W))
-    val read = Input(Bool())
-    val write = Input(Bool())
-    val cs = Input(Bool())
-  })
+  val slot_io = IO(new Slot())
+
+  val io = IO(new Bundle {})
 
   val clear = Wire(Bool())
   val go = Wire(Bool())
@@ -46,23 +41,23 @@ class timer extends Module {
 
   // read interface
 
-  io.rd_data := 0.U // default
-  switch(io.address) {
+  slot_io.rd_data := 0.U // default
+  switch(slot_io.address) {
     is("h00".U) {
-      io.rd_data := config_reg
+      slot_io.rd_data := config_reg
     }
     is("h01".U) {
-      io.rd_data := count_low
+      slot_io.rd_data := count_low
     }
     is("h02".U) {
-      io.rd_data := count_high
+      slot_io.rd_data := count_high
     }
   }
 
   // write interface
-  val wr_en: Bool = (io.write & io.cs & (io.address === "h00".U))
+  val wr_en: Bool = (slot_io.write & slot_io.cs & (slot_io.address === "h00".U))
   when(wr_en) {
-    config_reg := io.wr_data
+    config_reg := slot_io.wr_data
   }
 
   go := config_reg(1)

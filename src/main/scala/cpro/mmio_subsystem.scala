@@ -3,6 +3,16 @@ package cpro
 import chisel3._
 import cpro.mmio_cores._
 
+// slot interface
+class Slot extends Bundle {
+  val address = Input(UInt(5.W))
+  val rd_data = Output(UInt(32.W))
+  val wr_data = Input(UInt(32.W))
+  val read = Input(Bool())
+  val write = Input(Bool())
+  val cs = Input(Bool())
+}
+
 /*
 // clock and reset
     input logic clock,
@@ -64,41 +74,41 @@ class mmio_subsystem extends Module {
 
   // Instantiate the GPO (General Purpose Output)
   val gpo = Module(new GPO())
-  gpo.io.address <> slotRegAddr(0)
-  gpo.io.rd_data <> slotReadData(0)
-  gpo.io.wr_data <> slotWriteData(0)
-  gpo.io.read <> slotRead(0)
-  gpo.io.write <> slotWrite(0)
-  gpo.io.cs <> slotCs(0)
+  gpo.slot_io.address <> slotRegAddr(0)
+  gpo.slot_io.rd_data <> slotReadData(0)
+  gpo.slot_io.wr_data <> slotWriteData(0)
+  gpo.slot_io.read <> slotRead(0)
+  gpo.slot_io.write <> slotWrite(0)
+  gpo.slot_io.cs <> slotCs(0)
   gpo.io.data_out <> io.data_out
 
   // Instantiate the GPI (General Purpose Input)
   val gpi = Module(new GPI())
-  gpi.io.address <> slotRegAddr(1)
-  gpi.io.rd_data <> slotReadData(1)
-  gpi.io.wr_data <> slotWriteData(1)
-  gpi.io.read <> slotRead(1)
-  gpi.io.write <> slotWrite(1)
-  gpi.io.cs <> slotCs(1)
+  gpi.slot_io.address <> slotRegAddr(1)
+  gpi.slot_io.rd_data <> slotReadData(1)
+  gpi.slot_io.wr_data <> slotWriteData(1)
+  gpi.slot_io.read <> slotRead(1)
+  gpi.slot_io.write <> slotWrite(1)
+  gpi.slot_io.cs <> slotCs(1)
   gpi.io.data_in <> io.data_in
 
   // Instantiate the Timer
   val timer = Module(new timer())
-  timer.io.address <> slotRegAddr(2)
-  timer.io.rd_data <> slotReadData(2)
-  timer.io.wr_data <> slotWriteData(2)
-  timer.io.read <> slotRead(2)
-  timer.io.write <> slotWrite(2)
-  timer.io.cs <> slotCs(2)
+  timer.slot_io.address <> slotRegAddr(2)
+  timer.slot_io.rd_data <> slotReadData(2)
+  timer.slot_io.wr_data <> slotWriteData(2)
+  timer.slot_io.read <> slotRead(2)
+  timer.slot_io.write <> slotWrite(2)
+  timer.slot_io.cs <> slotCs(2)
 
   // Instantiate the Seven Segment Display
   val sevenSegDisplay = Module(new SevSegDisplay_core())
-  sevenSegDisplay.io.address <> slotRegAddr(3)
-  sevenSegDisplay.io.rd_data <> slotReadData(3)
-  sevenSegDisplay.io.wr_data <> slotWriteData(3)
-  sevenSegDisplay.io.read <> slotRead(3)
-  sevenSegDisplay.io.write <> slotWrite(3)
-  sevenSegDisplay.io.cs <> slotCs(3)
+  sevenSegDisplay.slot_io.address <> slotRegAddr(3)
+  sevenSegDisplay.slot_io.rd_data <> slotReadData(3)
+  sevenSegDisplay.slot_io.wr_data <> slotWriteData(3)
+  sevenSegDisplay.slot_io.read <> slotRead(3)
+  sevenSegDisplay.slot_io.write <> slotWrite(3)
+  sevenSegDisplay.slot_io.cs <> slotCs(3)
   io.anode_assert <> sevenSegDisplay.io.anode_select
   io.segs <> sevenSegDisplay.io.segs
 

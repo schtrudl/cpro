@@ -1,6 +1,7 @@
 package cpro.mmio_cores
 
 import chisel3._
+import cpro.Slot
 
 /*
 // clock and reset
@@ -18,15 +19,9 @@ import chisel3._
  */
 
 class GPO extends Module {
-  val io = IO(new Bundle {
-    // slot interface
-    val address = Input(UInt(5.W))
-    val rd_data = Output(UInt(32.W))
-    val wr_data = Input(UInt(32.W))
-    val read = Input(Bool())
-    val write = Input(Bool())
-    val cs = Input(Bool())
+  val slot_io = IO(new Slot())
 
+  val io = IO(new Bundle {
     // external signal
     val data_out = Output(UInt(16.W))
   })
@@ -36,15 +31,15 @@ class GPO extends Module {
 
   // decoding logic
   // there is only one register, so we do not need address signal
-  val wr_en: Bool = (io.write & io.cs)
+  val wr_en: Bool = (slot_io.write & slot_io.cs)
 
   when(wr_en) {
     // implicit subslice
-    buf_gpo := io.wr_data // (15,0)
+    buf_gpo := slot_io.wr_data // (15,0)
   }
 
   // copy the buf_gpo to out
   io.data_out := buf_gpo
 
-  io.rd_data := buf_gpo
+  slot_io.rd_data := buf_gpo
 }

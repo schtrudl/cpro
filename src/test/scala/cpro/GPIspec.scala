@@ -27,11 +27,11 @@ class GPISpec extends AnyFreeSpec with Matchers {
     simulate(new GPI()) { dut =>
       // Initialize signals
       dut.reset.poke(true.B)
-      dut.io.address.poke(0.U)
-      dut.io.wr_data.poke(0.U)
-      dut.io.read.poke(false.B)
-      dut.io.write.poke(false.B)
-      dut.io.cs.poke(false.B)
+      dut.slot_io.address.poke(0.U)
+      dut.slot_io.wr_data.poke(0.U)
+      dut.slot_io.read.poke(false.B)
+      dut.slot_io.write.poke(false.B)
+      dut.slot_io.cs.poke(false.B)
       dut.io.data_in.poke(7.U)
 
       // Apply reset
@@ -39,28 +39,28 @@ class GPISpec extends AnyFreeSpec with Matchers {
       dut.reset.poke(false.B)
 
       dut.clock.step(20)
-      dut.io.address.poke(1.U)
-      dut.io.wr_data.poke("hA5A5A5A5".U)
-      dut.io.write.poke(true.B)
-      dut.io.cs.poke(true.B)
+      dut.slot_io.address.poke(1.U)
+      dut.slot_io.wr_data.poke("hA5A5A5A5".U)
+      dut.slot_io.write.poke(true.B)
+      dut.slot_io.cs.poke(true.B)
       // write ignored
-      dut.io.rd_data.expect(7.U)
+      dut.slot_io.rd_data.expect(7.U)
       dut.clock.step(1)
-      dut.io.rd_data.expect(7.U)
+      dut.slot_io.rd_data.expect(7.U)
       dut.clock.step(10)
-      dut.io.rd_data.expect(7.U)
+      dut.slot_io.rd_data.expect(7.U)
       // ordinary read
-      dut.io.address.poke(1.U)
-      dut.io.read.poke(true.B)
-      dut.io.cs.poke(true.B)
-      dut.io.rd_data.expect(7.U)
+      dut.slot_io.address.poke(1.U)
+      dut.slot_io.read.poke(true.B)
+      dut.slot_io.cs.poke(true.B)
+      dut.slot_io.rd_data.expect(7.U)
       dut.clock.step(1)
-      dut.io.rd_data.expect(7.U)
+      dut.slot_io.rd_data.expect(7.U)
       // ext
       dut.io.data_in.poke(14.U)
-      dut.io.rd_data.expect(7.U)
+      dut.slot_io.rd_data.expect(7.U)
       dut.clock.step(1)
-      dut.io.rd_data.expect(14.U)
+      dut.slot_io.rd_data.expect(14.U)
     }
   }
 }

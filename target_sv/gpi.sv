@@ -2,12 +2,12 @@
 module GPI(
   input         clock,
                 reset,
-  input  [4:0]  io_address,
-  output [31:0] io_rd_data,
-  input  [31:0] io_wr_data,
-  input         io_read,
-                io_write,
-                io_cs,
+  input  [4:0]  slot_io_address,
+  output [31:0] slot_io_rd_data,
+  input  [31:0] slot_io_wr_data,
+  input         slot_io_read,
+                slot_io_write,
+                slot_io_cs,
   input  [15:0] io_data_in
 );
 
@@ -18,6 +18,6 @@ module GPI(
     else
       buf_in <= {16'h0, io_data_in};
   end // always @(posedge)
-  assign io_rd_data = buf_in;
+  assign slot_io_rd_data = buf_in;
 endmodule
 

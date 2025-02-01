@@ -4,6 +4,7 @@ import chisel3._
 import chisel3.util.Counter
 import chisel3.util.switch
 import chisel3.util.is
+import cpro.Slot
 
 /*
   // clock and reset
@@ -22,30 +23,24 @@ import chisel3.util.is
  */
 
 class SevSegDisplay_core extends Module {
-  val io = IO(new Bundle {
-    // slot interface
-    val address = Input(UInt(5.W))
-    val rd_data = Output(UInt(32.W))
-    val wr_data = Input(UInt(32.W))
-    val read = Input(Bool())
-    val write = Input(Bool())
-    val cs = Input(Bool())
+  val slot_io = IO(new Slot())
 
+  val io = IO(new Bundle {
     // external signal
     val anode_select = Output(UInt(8.W))
     val segs = Output(UInt(7.W))
   })
 
-  io.rd_data := 0.U
+  slot_io.rd_data := 0.U
 
-  val wr_en: Bool = (io.write & io.cs)
+  val wr_en: Bool = (slot_io.write & slot_io.cs)
 
   val config_reg = RegInit(0.U(32.W))
 
-  when(io.address === "h00".U) {
-    io.rd_data := config_reg
+  when(slot_io.address === "h00".U) {
+    slot_io.rd_data := config_reg
     when(wr_en) {
-      config_reg := io.wr_data
+      config_reg := slot_io.wr_data
     }
   }
 
@@ -53,10 +48,10 @@ class SevSegDisplay_core extends Module {
 
   val display_data = RegInit(0.U(32.W))
 
-  when(io.address === "h01".U) {
-    io.rd_data := display_data
+  when(slot_io.address === "h01".U) {
+    slot_io.rd_data := display_data
     when(wr_en) {
-      display_data := io.wr_data
+      display_data := slot_io.wr_data
     }
   }
 
