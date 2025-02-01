@@ -1,10 +1,16 @@
-# Rewrite FPROSoC in chisel
+# Rewrite FPROSoC in Chisel
 
-Chisel is technically not a new language but a library written in and for Scala (domain specific language (DSL) for describing hardware circuits embedded in Scala), but given it's special use and operators it's often described as open-source hardware description language.
+## Chisel
 
-TODO: What exactly is HW gen / history of HW gen -- simple java/python scripts that did only string manipulation; what is RTL
+Chisel is technically not a new language but a library written in and for Scala, more exactly it is domain specific language (DSL) for describing hardware circuits embedded in Scala, but given it's extensions it provides on top of Scala it's often described as open-source hardware description language.
 
-## Chisel to Verilog
+### Hardware construction language
+
+In the early days, scripting languages like Perl and Python were used to generate VHDL/Verilog code (sometimes from excel spreadsheets), but the problem with such generators were that they worked on strings, without real understanding (typification) of ingested/generated code. SystemVerilog tried to migrate the this by offering some generational constructs (`#(parameter N=4)`, `generate`) and even some high level constructs like classes that are only available for verification (are typically not synthesizable).
+
+Chisel is actually hardware construction language, that allows us to write hardware generators instead of describing hardware directly. Because it uses Scala each module can be parametrized as any Scala class (using various parameters and generics) and then use those arguments for "generation" using Scala loops or even higher order functions. To understand how and why this works, we will take a look in Chisel to Verilog compilation.
+
+### Chisel to Verilog
 
 ```mermaid
 flowchart TD;
@@ -14,37 +20,58 @@ flowchart TD;
     end
 ```
 
-### Compilation
+#### Compilation
 
 Chisel gets compiled (as Scala) to JVM, which is then executed (this is usually done by `sbt run` command).
 
-### Elaboration
+#### Elaboration
 
-Is execution on chisel compiled program, which during construction of main class (and it's subsequent classes) add hardware AST (CHIRRTL) to `ChiselStage`. Each `Module` class gets compiled separately (and it will get lowered into separate SystemVerilog module).
+Is execution on Chisel compiled program, which during construction of `Top` class (and it's subsequent classes) add hardware AST (CHIRRTL) to `ChiselStage`. Each `Module` class gets compiled separately (and it will get lowered into separate SystemVerilog module). Other classes are inlined into first parent `Module` class. This part does hardware generation, from parametrized constructs to concrete hardware AST (modules). Each iteration of loops just adds more hardware AST nodes to stage.
 
-TODO: non-modules are simpl scala code that inserts HW node x times and more of this stuff. maybe an example; show CHIRRTL
-
-### Circuit IR Compilers and Tools
+#### Circuit IR Compilers and Tools
 
 Scala FIRRTL (SFC) lowers CHIRRTL to FIRRTL, on which FIRRTL compilers apply some transformations (optimizations; ex: for unused signals) and lower it to MLIR that get optimized further and compiled into targeted language (usually SystemVerilog).
 
-## Setting up environment/workflow
+## Design flow in Chisel
 
-Chisel is board independent, it generates SystemVerilog from chisel (scala) that is latter to be consumed by other FPGA tools (in our case Vivaldo) to generate bitstream for board.
+Chisel is board independent, it generates SystemVerilog that is later to be consumed by other FPGA tools (in our case Vivaldo) to generate bitstream for board.
 
-We want to keep all sources in single tree (so we will use chisel tree). Chisel will generates all final System verilog files that are put in target_sv directory (even if blackboxed they are just copied from resources), files are then loaded in Vivaldo as folder (make sure that "copy to project" is not checked, to prevent Vivaldo from vendoring sources)
+Firstly, I imported all files from vaja6 into template Chisel tree (under resource directory), this way all sources are in one place (single source of truth). Secondly, I created `BlackBox` for Top.sv file. `BlackBox` are like header files in C, they only define interface/signature not actual implementation and are not type checked (mismatch between Verilog and Chisel `BlackBox` will cause error in simulation/synthesis if you are lucky). Lastly I setup `ChiselStage` to emit SystemVerilog files into target_sv directory.
 
-two step build process in chisel: compile scala then compile to verilog: <https://chipyard.readthedocs.io/en/stable/Customization/Incorporating-Verilog-Blocks.html#differences-between-hasblackboxpath-and-hasblackboxresource>, meaning that it's not that it's not that strongly typed (I am Rust programer myself). Its fitted on scala lang.
+```scala
+class Top extends BlackBox with HasBlackBoxResource {
+  val io = IO(new Bundle {
+    val clock = Input(Clock())
+    val reset = Input(Reset())
+    val sw = Input(UInt(16.W))
+    val led = Output(UInt(16.W))
+    val anode_assert = Output(UInt(8.W))
+    val segs = Output(UInt(7.W))
+  })
+  // will copy resource files into target_sv
+  addResource("/top.sv")
+  addResource("/mcs_bridge.sv")
+  addResource("/mmio_controller.sv")
+  addResource("/mmio_cores.sv")
+  addResource("/mmio_subsystem.sv")
+}
 
-Firstly I just imported all files from vaja6, create blackbox for main file and instantiate/connect blackbox in Top.scala. Then it was start to test whole workflow (creating vivaldo project run and test on board) and after all that we can really start, using top-down approach by incrementally rewriting modules into chisel and/or blackboxing them.
+object Top extends App {
+  ChiselStage.emitSystemVerilogFile(
+    new Top,
+    Array("--split-verilog", "--target-dir", "target_sv/"),
+    firtoolOpts = Array("-disable-all-randomization", "-strip-debug-info")
+  )
+}
+```
 
-Blackbox -> Module and blackbox it's children
+Now if we run `sbt run` Chisel/Scala gets compiled, elaborated and lowered into SystemVerilog files that are located in target_sv. This folder can now be loaded into vivaldo project as sources folder (make sure that "copy to project" is not checked). Then we simply associate ELF file and generate bitstream and test on the board.
 
-## Blackboxes
+Using top-down approach we can incrementally rewrite Modules into Chisel and/or blackbox them. Then regenerate bitstream and retest, this way we know we did not break anything in this step of rewriting. We can also write tests in Chisel for modules to ensure no behavior changes (it make sense to write test for blackboxes and later when doing rewrite we expect that tests will still pass). Test are run using `sbt test` and they require verilator to be installed (WSL on Windows).
 
-are like header files in C, they only define interface and are not type checked (mismatch between impl of modul and chisel blackbox will cause error in simulation/synthesis)
+For `Top` class we need to change it from `BlackBox` to `Module`, then create blackboxes for all of it's children (`microblaze_mcs_0`, `mcs_bridge`, `mmio_subsystem`) and write actual Chisel implementation of `Top` (which is mostly just connecting wires between it's children) and finally remove Top.sv file from resources.
 
-## Verilog -> chisel
+## Verilog -> Chisel
 
 no support for subword assignments, always need to use cat
 
@@ -89,3 +116,6 @@ not bug but a feature: all wires need to be connected, one can use `DontCare`
 - <https://stackoverflow.com/questions/44548198/chisel-code-transformation>
 - <https://chipyard.readthedocs.io/en/stable/Tools/index.html>
 - <https://chipyard.readthedocs.io/en/stable/Customization/Firrtl-Transforms.html>
+- Schoeberl, M. (2019). Digital Design with Chisel. Kindle Direct Publishing
+- <https://github.com/freechipsproject/chisel-bootcamp>
+- <https://en.wikipedia.org/wiki/SystemVerilog>

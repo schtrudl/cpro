@@ -6,7 +6,7 @@ import chisel3._
 // _root_ disambiguates from package chisel3.util.circt if user imports chisel3.util._
 import _root_.circt.stage.ChiselStage
 
-class Top extends Module {
+class Top extends Module { // whole class body is actually constructor
   val sw = IO(Input(UInt(16.W)))
   val led = IO(Output(UInt(16.W)))
   val anode_assert = IO(Output(UInt(8.W)))
@@ -79,7 +79,7 @@ class Top extends Module {
 }
 
 /** Generate Verilog sources */
-object Top extends App {
+object Top extends App { // object is used for static members
   ChiselStage.emitSystemVerilogFile(
     new Top,
     Array("--split-verilog", "--target-dir", "target_sv/"),

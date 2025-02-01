@@ -1,5 +1,23 @@
 {
     "files.watcherExclude": {
         "**/target": true
-    }
+    },
+    "cSpell.words": [
+        "bitstream",
+        "blackbox",
+        "CHIRRTL",
+        "CIRCT",
+        "FIRRTL",
+        "FPRO",
+        "MLIR",
+        "synthesizable",
+        "Verilog",
+        "VHDL",
+        "Vivaldo"
+    ],
+    "cSpell.flagWords": [
+        "chisel: Chisel",
+        "scala: Scala",
+        "verilog: Verilog"
+    ]
 }
