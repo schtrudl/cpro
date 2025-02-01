@@ -49,8 +49,6 @@ class mmio_subsystem extends Module {
 
   // Instantiate the mmio_controller
   val mmioController = Module(new mmio_controller())
-  mmioController.clock <> clock
-  mmioController.reset <> reset
   mmioController.io.mmio_cs <> io.mmio_cs
   mmioController.io.mmio_address <> io.mmio_address
   mmioController.io.mmio_write_data <> io.mmio_write_data
@@ -66,8 +64,6 @@ class mmio_subsystem extends Module {
 
   // Instantiate the GPO (General Purpose Output)
   val gpo = Module(new GPO())
-  gpo.clock <> clock
-  gpo.reset <> reset
   gpo.io.address <> slotRegAddr(0)
   gpo.io.rd_data <> slotReadData(0)
   gpo.io.wr_data <> slotWriteData(0)
@@ -78,8 +74,6 @@ class mmio_subsystem extends Module {
 
   // Instantiate the GPI (General Purpose Input)
   val gpi = Module(new GPI())
-  gpi.clock <> clock
-  gpi.reset <> reset
   gpi.io.address <> slotRegAddr(1)
   gpi.io.rd_data <> slotReadData(1)
   gpi.io.wr_data <> slotWriteData(1)
@@ -90,8 +84,6 @@ class mmio_subsystem extends Module {
 
   // Instantiate the Timer
   val timer = Module(new timer())
-  timer.clock <> clock
-  timer.reset <> reset
   timer.io.address <> slotRegAddr(2)
   timer.io.rd_data <> slotReadData(2)
   timer.io.wr_data <> slotWriteData(2)
@@ -101,8 +93,6 @@ class mmio_subsystem extends Module {
 
   // Instantiate the Seven Segment Display
   val sevenSegDisplay = Module(new SevSegDisplay_core())
-  sevenSegDisplay.clock <> clock
-  sevenSegDisplay.reset <> reset
   sevenSegDisplay.io.address <> slotRegAddr(3)
   sevenSegDisplay.io.rd_data <> slotReadData(3)
   sevenSegDisplay.io.wr_data <> slotWriteData(3)

@@ -61,8 +61,6 @@ class SevSegDisplay_core extends Module {
   }
 
   val seg7 = Module(new SevSegDisplay())
-  seg7.clock <> clock
-  seg7.reset <> reset
   seg7.io.enable_7seg <> enable_7seg
   seg7.io.display_data <> display_data
   seg7.io.anode_select <> io.anode_select

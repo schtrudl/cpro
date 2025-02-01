@@ -64,8 +64,6 @@ class Top extends Module { // whole class body is actually constructor
 
   // Instantiate the MMIO Subsystem
   val mmioSubsystem = Module(new mmio_subsystem)
-  mmioSubsystem.clock <> clock
-  mmioSubsystem.reset <> reset
   mmioSubsystem.io.mmio_cs <> fp_mmio_cs
   mmioSubsystem.io.mmio_address <> fp_addr
   mmioSubsystem.io.mmio_write_data <> fp_wr_data
