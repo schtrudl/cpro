@@ -76,48 +76,41 @@ class mmio_subsystem extends Module {
   mmioController.io.slot_read_data <> slotReadData
   mmioController.io.slot_read <> slotRead
 
+  var slots: Array[MMIO_core] = Array()
+
   // Instantiate the GPO (General Purpose Output)
   val gpo = Module(new GPO())
-  gpo.slot_io.address <> slotRegAddr(0)
-  gpo.slot_io.rd_data <> slotReadData(0)
-  gpo.slot_io.wr_data <> slotWriteData(0)
-  gpo.slot_io.read <> slotRead(0)
-  gpo.slot_io.write <> slotWrite(0)
-  gpo.slot_io.cs <> slotCs(0)
   gpo.io.data_out <> io.data_out
+  slots :+= gpo
 
   // Instantiate the GPI (General Purpose Input)
   val gpi = Module(new GPI())
-  gpi.slot_io.address <> slotRegAddr(1)
-  gpi.slot_io.rd_data <> slotReadData(1)
-  gpi.slot_io.wr_data <> slotWriteData(1)
-  gpi.slot_io.read <> slotRead(1)
-  gpi.slot_io.write <> slotWrite(1)
-  gpi.slot_io.cs <> slotCs(1)
   gpi.io.data_in <> io.data_in
+  slots :+= gpi
 
   // Instantiate the Timer
   val timer = Module(new timer())
-  timer.slot_io.address <> slotRegAddr(2)
-  timer.slot_io.rd_data <> slotReadData(2)
-  timer.slot_io.wr_data <> slotWriteData(2)
-  timer.slot_io.read <> slotRead(2)
-  timer.slot_io.write <> slotWrite(2)
-  timer.slot_io.cs <> slotCs(2)
+  slots :+= timer
 
   // Instantiate the Seven Segment Display
   val sevenSegDisplay = Module(new SevSegDisplay_core())
-  sevenSegDisplay.slot_io.address <> slotRegAddr(3)
-  sevenSegDisplay.slot_io.rd_data <> slotReadData(3)
-  sevenSegDisplay.slot_io.wr_data <> slotWriteData(3)
-  sevenSegDisplay.slot_io.read <> slotRead(3)
-  sevenSegDisplay.slot_io.write <> slotWrite(3)
-  sevenSegDisplay.slot_io.cs <> slotCs(3)
   io.anode_assert <> sevenSegDisplay.io.anode_select
   io.segs <> sevenSegDisplay.io.segs
+  slots :+= sevenSegDisplay
+
+  require(slots.length < 64)
+
+  for ((core, i) <- slots.zipWithIndex) {
+    core.slot_io.address <> slotRegAddr(i)
+    core.slot_io.rd_data <> slotReadData(i)
+    core.slot_io.wr_data <> slotWriteData(i)
+    core.slot_io.read <> slotRead(i)
+    core.slot_io.write <> slotWrite(i)
+    core.slot_io.cs <> slotCs(i)
+  }
 
   // Default read data for unused slots
-  for (i <- 4 until 64) {
-    slotReadData(i) := "hffffffff".U
+  for (i <- slots.length until 64) {
+    slotReadData(i) := "h_ffff_ffff".U
   }
 }
