@@ -45,31 +45,9 @@ class Top extends Module { // whole class body is actually constructor
   mcsBridge.io.io_read_strobe <> IO_read_strobe
   mcsBridge.io.io_ready <> IO_ready
 
-  // FPro Bus Signals
-  val fp_video_cs = Wire(Bool())
-  val fp_mmio_cs = Wire(Bool())
-  val fp_wr = Wire(Bool())
-  val fp_rd = Wire(Bool())
-  val fp_addr = Wire(UInt(21.W))
-  val fp_wr_data = Wire(UInt(32.W))
-  val fp_rd_data = Wire(UInt(32.W))
-
-  mcsBridge.io.fp_video_cs <> fp_video_cs
-  mcsBridge.io.fp_mmio_cs <> fp_mmio_cs
-  mcsBridge.io.fp_wr <> fp_wr
-  mcsBridge.io.fp_rd <> fp_rd
-  mcsBridge.io.fp_addr <> fp_addr
-  mcsBridge.io.fp_wr_data <> fp_wr_data
-  mcsBridge.io.fp_rd_data <> fp_rd_data
-
   // Instantiate the MMIO Subsystem
   val mmioSubsystem = Module(new mmio_subsystem)
-  mmioSubsystem.io.mmio_cs <> fp_mmio_cs
-  mmioSubsystem.io.mmio_address <> fp_addr
-  mmioSubsystem.io.mmio_write_data <> fp_wr_data
-  mmioSubsystem.io.mmio_write <> fp_wr
-  mmioSubsystem.io.mmio_read_data <> fp_rd_data
-  mmioSubsystem.io.mmio_read <> fp_rd
+  mmioSubsystem.io.fp <> mcsBridge.io.fp
   mmioSubsystem.io.data_in <> sw
   mmioSubsystem.io.data_out <> led
   mmioSubsystem.io.anode_assert <> anode_assert

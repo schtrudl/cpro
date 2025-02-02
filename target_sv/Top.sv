@@ -8,11 +8,12 @@ module Top(
   output [6:0]  segs
 );
 
-  wire [31:0] _mmioSubsystem_io_mmio_read_data;
+  wire [31:0] _mmioSubsystem_io_fp_rd_data;
   wire [31:0] _mcsBridge_io_io_read_data;
+  wire        _mcsBridge_io_fp_video_cs;
   wire        _mcsBridge_io_fp_mmio_cs;
-  wire        _mcsBridge_io_fp_wr;
-  wire        _mcsBridge_io_fp_rd;
+  wire        _mcsBridge_io_fp_write;
+  wire        _mcsBridge_io_fp_read;
   wire [20:0] _mcsBridge_io_fp_addr;
   wire [31:0] _mcsBridge_io_fp_wr_data;
   wire        _microblazeMCS_IO_addr_strobe;
@@ -41,27 +42,28 @@ module Top(
     .io_io_byte_enable  (_microblazeMCS_IO_byte_enable),
     .io_io_read_data    (_mcsBridge_io_io_read_data),
     .io_io_read_strobe  (_microblazeMCS_IO_read_strobe),
-    .io_fp_video_cs     (/* unused */),
+    .io_fp_video_cs     (_mcsBridge_io_fp_video_cs),
     .io_fp_mmio_cs      (_mcsBridge_io_fp_mmio_cs),
-    .io_fp_wr           (_mcsBridge_io_fp_wr),
-    .io_fp_rd           (_mcsBridge_io_fp_rd),
+    .io_fp_write        (_mcsBridge_io_fp_write),
+    .io_fp_read         (_mcsBridge_io_fp_read),
     .io_fp_addr         (_mcsBridge_io_fp_addr),
     .io_fp_wr_data      (_mcsBridge_io_fp_wr_data),
-    .io_fp_rd_data      (_mmioSubsystem_io_mmio_read_data)
+    .io_fp_rd_data      (_mmioSubsystem_io_fp_rd_data)
   );
   mmio_subsystem mmioSubsystem (
-    .clock              (clock),
-    .reset              (reset),
-    .io_mmio_cs         (_mcsBridge_io_fp_mmio_cs),
-    .io_mmio_address    (_mcsBridge_io_fp_addr),
-    .io_mmio_write_data (_mcsBridge_io_fp_wr_data),
-    .io_mmio_write      (_mcsBridge_io_fp_wr),
-    .io_mmio_read_data  (_mmioSubsystem_io_mmio_read_data),
-    .io_mmio_read       (_mcsBridge_io_fp_rd),
-    .io_data_in         (sw),
-    .io_data_out        (led),
-    .io_anode_assert    (anode_assert),
-    .io_segs            (segs)
+    .clock           (clock),
+    .reset           (reset),
+    .io_fp_video_cs  (_mcsBridge_io_fp_video_cs),
+    .io_fp_mmio_cs   (_mcsBridge_io_fp_mmio_cs),
+    .io_fp_write     (_mcsBridge_io_fp_write),
+    .io_fp_read      (_mcsBridge_io_fp_read),
+    .io_fp_addr      (_mcsBridge_io_fp_addr),
+    .io_fp_wr_data   (_mcsBridge_io_fp_wr_data),
+    .io_fp_rd_data   (_mmioSubsystem_io_fp_rd_data),
+    .io_data_in      (sw),
+    .io_data_out     (led),
+    .io_anode_assert (anode_assert),
+    .io_segs         (segs)
   );
 endmodule
 

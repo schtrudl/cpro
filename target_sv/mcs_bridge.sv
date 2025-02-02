@@ -9,8 +9,8 @@ module mcs_bridge(
   input         io_io_read_strobe,
   output        io_fp_video_cs,
                 io_fp_mmio_cs,
-                io_fp_wr,
-                io_fp_rd,
+                io_fp_write,
+                io_fp_read,
   output [20:0] io_fp_addr,
   output [31:0] io_fp_wr_data,
   input  [31:0] io_fp_rd_data
@@ -20,8 +20,8 @@ module mcs_bridge(
   assign io_io_read_data = io_fp_rd_data;
   assign io_fp_video_cs = mcs_bridge_enable & io_io_address[23];
   assign io_fp_mmio_cs = mcs_bridge_enable & ~(io_io_address[23]);
-  assign io_fp_wr = io_io_write_strobe;
-  assign io_fp_rd = io_io_read_strobe;
+  assign io_fp_write = io_io_write_strobe;
+  assign io_fp_read = io_io_read_strobe;
   assign io_fp_addr = io_io_address[22:2];
   assign io_fp_wr_data = io_io_write_data;
 endmodule
