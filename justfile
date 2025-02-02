@@ -10,3 +10,6 @@ build:
 
 test:
     sbt test
+
+slides:
+    pandoc -F mermaid-filter --standalone -t revealjs -s -o slides.html slides.md --include-in-header=header-slides.html --slide-level=2

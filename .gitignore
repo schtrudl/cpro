@@ -341,3 +341,5 @@ hs_err_pid*
 
 .metals
 .bloop
+
+mermaid-filter.err
