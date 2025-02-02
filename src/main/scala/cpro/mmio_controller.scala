@@ -2,6 +2,7 @@ package cpro
 
 import chisel3._
 import chisel3.util.Fill
+import chisel3.util.UIntToOH
 
 class Slots extends Bundle {
   val cs = Output(UInt(64.W)) // 64-bit signal
@@ -37,7 +38,7 @@ class mmio_controller extends Module {
   // generate chip select signal
   io.slot.cs := 0.U
   when(io.fp.mmio_cs) {
-    io.slot.cs := (1.U << slot_addr)
+    io.slot.cs := UIntToOH(slot_addr)
   }
 
   // broadcast everything
