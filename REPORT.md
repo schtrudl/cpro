@@ -72,6 +72,8 @@ Using top-down approach we can incrementally rewrite Modules into Chisel and/or 
 
 For `Top` class we need to change it from `BlackBox` to `Module`, then create blackboxes for all of it's children (`microblaze_mcs_0`, `mcs_bridge`, `mmio_subsystem`) and write actual Chisel implementation of `Top` (which is mostly just connecting wires between it's children) and finally remove Top.sv file from resources.
 
+After whole rewrite was done it was time to write more idiomatic Chisel, more on that later.
+
 ## Verilog -> Chisel
 
 ### Modules
@@ -166,9 +168,9 @@ _out_arr := m.io.out_arr
 
 - `=` is Scala assignment (evaluated at elaboration time)
 
-- `:=` is Chisel (directional) assignment that wires the **input** of LHS to the **output** of the RHS that will produce `<=` or `assign =` depending on the context
+- `:=` is Chisel (mono-directional) assignment that wires the **input** of LHS to the **output** of the RHS (`assign =`, `<=`)
 
-- `<>` is Chisel connection operator, that generally gets compiled down to Verilog's `assign =`
+- `<>` is Chisel bi-directional connection operator (`assign =`)
 
 ### `Data` classes
 
@@ -249,6 +251,8 @@ r := 1.U
 // when cannot use Scala's if as those are evaluated at elaboration (are equal to Verilog's `generate if`)
 when(reset) { // will add special HW AST that will emit if in Verilog
   r := 0.U
+}.elsewhen(false.B) {
+  // never
 }.otherwise {
   r := 1.U // redundant
 }
@@ -325,6 +329,112 @@ endcase
 - `Mux1H(sel: Seq[Bool], in: Seq[Data])`
 - `ShiftRegister(in: Data, n: Int[, en: Bool]): Data`
 - and much more in [Chisel cheatsheet](https://github.com/freechipsproject/chisel-cheatsheet/blob/master/chisel_cheatsheet-3.6.pdf)
+
+## Idiomatic Chisel
+
+As we saw, Verilog can be simply mapped to Chisel, but such Chisel code is not idiomatic/optimal. So after rewrite was done it was time to fix this too.
+
+### Directly connecting instances
+
+In Chisel you can connect instances directly without intermediate wires:
+
+```diff
+-  val w = Wire(Bool())
+val m1 = Module(M1())
+-  m1.w <> w
+val m2 = Module(M2())
+-  m2.w <> w
+
++  m1.w <> m2.w
+```
+
+### Using `Bundle`s for common ports
+
+```scala
+// FPro bus (consumer viewpoint)
+class FPRO extends Bundle {
+  val video_cs = Input(Bool())
+  val mmio_cs = Input(Bool())
+  val write = Input(Bool())
+  val read = Input(Bool())
+  val addr = Input(UInt(21.W))
+  val wr_data = Input(UInt(32.W))
+  val rd_data = Output(UInt(32.W))
+}
+```
+
+so now we can reuse it everywhere:
+
+```scala
+// this module consumes FPRO signals
+class mmio_controller extends Module {
+  val fp = IO(FPRO())
+  // ...
+}
+
+class mmio_subsystem extends Module {
+  val fp = IO(FPRO())
+  // ...
+  val mmioController = Module(new mmio_controller())
+  mmioController.fp <> fp // will connect all wires automatically
+  // ...
+}
+
+// this module produces FPRO signals
+class mcs_bridge extends Module {
+  val fp = Flipped(FPRO()) // flips Input <-> Output
+  // ...
+}
+```
+
+### Using `trait` for interfaces
+
+```scala
+trait MMIO_core {
+  val slot_io = IO(new Slot())
+}
+
+class GPI extends Module with MMIO_core {
+  // implicit slot_io inherited from trait
+  // val slot_io = IO(new Slot())
+
+  // ...
+}
+
+class GPO extends Module with MMIO_core {
+  // val slot_io = IO(new Slot())
+
+  // ...
+}
+```
+
+#### This allows dynamic core connections
+
+```scala
+var slots: Array[MMIO_core] = Array()
+
+// Instantiate the GPO (General Purpose Output)
+val gpo = Module(new GPO())
+gpo.io.data_out <> io.data_out
+slots :+= gpo // append to array
+
+// Instantiate the GPI (General Purpose Input)
+val gpi = Module(new GPI())
+gpi.io.data_in <> io.data_in
+slots :+= gpi
+
+// ...
+
+require(slots.length < 64)
+for ((core, i) <- slots.zipWithIndex) {
+  core.slot_io.address <> slot.reg_addr(i)
+  core.slot_io.rd_data <> slot.read_data(i)
+  core.slot_io.wr_data <> slot.write_data(i)
+  core.slot_io.read <> slot.read(i)
+  core.slot_io.write <> slot.write(i)
+  core.slot_io.cs <> slot.cs(i)
+}
+```
 
 ## Known chisel problems
 
