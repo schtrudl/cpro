@@ -4,7 +4,7 @@ import chisel3._
 import chisel3.util.Counter
 import chisel3.util.switch
 import chisel3.util.is
-import cpro.Slot
+import cpro.{Slot, MMIO_core}
 
 /*
   // clock and reset
@@ -22,9 +22,7 @@ import cpro.Slot
     output logic [6:0] segs
  */
 
-class SevSegDisplay_core extends Module {
-  val slot_io = IO(new Slot())
-
+class SevSegDisplay_core extends Module with MMIO_core {
   val io = IO(new Bundle {
     // external signal
     val anode_select = Output(UInt(8.W))

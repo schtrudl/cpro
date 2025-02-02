@@ -13,6 +13,10 @@ class Slot extends Bundle {
   val cs = Input(Bool())
 }
 
+trait MMIO_core {
+  val slot_io = IO(new Slot())
+}
+
 /*
 // clock and reset
     input logic clock,

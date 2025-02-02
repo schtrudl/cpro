@@ -1,7 +1,7 @@
 package cpro.mmio_cores
 
 import chisel3._
-import cpro.Slot
+import cpro.{Slot, MMIO_core}
 
 /*
 // clock and reset
@@ -18,9 +18,7 @@ import cpro.Slot
     output logic [15:0]  data_out
  */
 
-class GPO extends Module {
-  val slot_io = IO(new Slot())
-
+class GPO extends Module with MMIO_core {
   val io = IO(new Bundle {
     // external signal
     val data_out = Output(UInt(16.W))

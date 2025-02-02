@@ -3,7 +3,7 @@ package cpro.mmio_cores
 import chisel3._
 import chisel3.util.switch
 import chisel3.util.is
-import cpro.Slot
+import cpro.{Slot, MMIO_core}
 
 /*
   // clock and reset
@@ -18,9 +18,7 @@ import cpro.Slot
     input logic cs,
  */
 
-class timer extends Module {
-  val slot_io = IO(new Slot())
-
+class timer extends Module with MMIO_core {
   val io = IO(new Bundle {})
 
   val clear = Wire(Bool())
