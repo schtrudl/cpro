@@ -49,19 +49,49 @@ flowchart TD;
 
 ::: notes
 
-## Compilation
-
 Chisel gets compiled (as Scala) to JVM, which is then executed (this is usually done by `sbt run` command).
-
-## Elaboration
 
 Is execution on Chisel compiled program, which during construction of `Top` class (and it's subsequent classes) add hardware AST (CHIRRTL) to `ChiselStage`. Each `Module` class gets compiled separately (and it will get lowered into separate SystemVerilog module). Other classes are inlined into first parent `Module` class. This part does hardware generation, from parametrized constructs to concrete hardware AST (modules). Each iteration of loops just adds more hardware AST nodes to stage.
 
-## Circuit IR Compilers and Tools
-
 Scala FIRRTL (SFC) lowers CHIRRTL to FIRRTL, on which FIRRTL compilers apply some transformations (optimizations; ex: for unused signals) and lower it to MLIR that get optimized further and compiled into targeted language (usually SystemVerilog).
-
 :::
+
+## Elaboration
+
+```scala
+// The body of a Scala class is the default constructor
+// MyModule's default constructor has a single Int argument
+// Superclass Module is a chisel3 Class that begins construction of a hardware module
+// Implicit clock and reset inputs are added by the Module constructor
+class MyModule(width: Int) extends Module {
+  // io is a required field for subclasses of Module
+  // new Bundle creates an instance of an anonymous subclass of Chisel's Bundle (like a struct)
+  // When executing the function IO(...), Chisel adds ports to the Module based on the Bundle object
+  val io = IO(new Bundle {
+    val in = Input(UInt(width.W)) // Input port with width defined by parameter
+    val out = Output(UInt()) // Output port with width inferred by Chisel
+  })
+
+  // A Scala println that will print at elaboration time each time this Module is instantiated
+  // This does NOT create a node in the Module AST
+  println(s"Constructing MyModule with width $width")
+
+  // Adds a register declaration node to the Module AST
+  // This counter register resets to the value of input port io.in
+  // The implicit clock and reset inputs feed into this node
+  val counter = RegInit(io.in)
+
+  // Adds an addition node to the hardware AST with operands counter and 1
+  val inc = counter + 1.U // + is overloaded, this is actually a Chisel function call
+
+  // Connects the output of the addition node to the "next" value of counter
+  counter := inc
+
+  // Adds a printf node to the Module AST that will print at simulation time
+  // The value of counter feeds into this node
+  printf("counter = %d\n", counter)
+}
+```
 
 # Design flow in Chisel
 
@@ -178,6 +208,83 @@ After whole rewrite was done it was time to write more idiomatic Chisel, more on
 
 # Verilog -> Chisel
 
+## `Data`
+
+![<sup>Data can be represented as a bit vector in a hardware design</sup>](https://raw.githubusercontent.com/chipsalliance/chisel3/master/docs/src/images/type_hierarchy.svg)
+
+::: notes
+All Chisel types have `Data` for superclass. Every `Data` class can be represented as a bit vector in a hardware design.
+:::
+
+## `Bool`
+
+`Bool()` represents single bit that can be `true.B` or `false.B`. Chisel does not have representation of Z or X states.
+
+## `UInt`
+
+`value.U(width.W)`
+
+```scala
+0xA0.U(16.W) // this can be problematic if we overflow Scala integer
+"hA0".U(16.W) // so string literals are preferred
+```
+
+## slices
+
+| Verilog | Chisel |
+|---------|--------|
+| `a[15]` | `a(15)`|
+|`a[32:16]`| `a(32,16)`|
+
+## slice assignment
+
+Chisel does not support slice/subword assignment, but that limitation can be bypassed by conCATenation or by transmuting to `Vec` or `Bundle`
+
+```scala
+val data = 0.U(8.W)
+val ones = chisel3.util.Fill(4, 1.U) // 0b1111
+// {4{1}}
+val data2 = chisel3.util.Cat(data, ones).U(8.W) // 0b0000_1111
+// {data,ones}
+val data22 = chisel3.util.Cat(data(7,4), ones) // 0b0000_1111
+```
+
+::: notes
+The reason for this is that subword assignment generally hints at a better abstraction with an aggregate/structured types.
+:::
+
+## `Vec`
+
+`Vec`tors are like arrays. They have fixed size of same type/size elements. This restriction is relaxed in `MixedVec`
+
+```scala
+val a = Vec(4, Bool())
+// with default options this becomes:
+/*
+logic a_0;
+logic a_1;
+logic a_2;
+logic a_3;
+*/
+```
+
+## `Bundle`
+
+Are like `struct` in C, they group together several named fields. This is mostly used to group ports (module inputs/outputs) into Bundles.
+
+```scala
+val b = new Bundle({
+  val a = Bool()
+  val b = Bool()
+  val c = Bool()
+})
+/*
+logic b_a
+logic b_b
+logic b_c
+*/
+```
+
 ## `Module` definition
 
 <div class="container">
@@ -291,87 +398,6 @@ _out_arr := m.io.out_arr
 
 - `<>` is Chisel bi-directional connection operator (`assign =`)
 
-## `Data` classes
-
-![](https://raw.githubusercontent.com/chipsalliance/chisel3/master/docs/src/images/type_hierarchy.svg)
-
-::: notes
-All Chisel types have `Data` for superclass. Every `Data` class can be represented as a bit vector in a hardware design.
-:::
-
-## `Bool`
-
-`Bool()` represents single bit that can be `true.B` or `false.B`. Chisel does not have representation of Z or X states.
-
-## `UInt`
-
-`value.U(width.W)`
-
-```scala
-0xA0.U(16.W) // this can be problematic if we overflow Scala integer
-"hA0".U(16.W) // so string literals are preferred
-```
-
-## slices
-
-| Verilog | Chisel |
-|---------|--------|
-| `a[15]` | `a(15)`|
-|`a[32:16]`| `a(32,16)`|
-
-## slice assignment
-
-Chisel does not support slice/subword assignment, but that limitation can be bypassed by conCATenation or by transmuting to `Vec` or `Bundle`
-
-```scala
-val data = 0.U(8.W)
-val ones = chisel3.util.Fill(4, 1.U) // 0b1111
-// {4{1}}
-val data2 = chisel3.util.Cat(data, ones).U(8.W) // 0b0000_1111
-// {data,ones}
-val data22 = chisel3.util.Cat(data(7,4), ones) // 0b0000_1111
-```
-
-::: note
-The reason for this is that subword assignment generally hints at a better abstraction with an aggregate/structured types.
-:::
-
-## `Vec`
-
-`Vec`tors are like arrays. They have fixed size of same type/size elements. This restriction is relaxed in `MixedVec`
-
-```scala
-val a = Vec(4, Bool())
-// with default options this becomes:
-/*
-logic a_0;
-logic a_1;
-logic a_2;
-logic a_3;
-*/
-```
-
-## `Bundle`
-
-Are like `struct` in C, they group together several named fields. This is mostly used to group ports (module inputs/outputs) into Bundles.
-
-```scala
-val b = new Bundle({
-  val a = Bool()
-  val b = Bool()
-  val c = Bool()
-})
-/*
-logic b_a
-logic b_b
-logic b_c
-*/
-```
-
-## "Variables"
-
-Any local constant `localparam a = 5` can be defined as normal Scala value `val a = 5`.
-
 ## "Variables"
 
 ::: notes
@@ -396,14 +422,14 @@ r := 1.U
 r := 2.U // last assignments wins
 ```
 
-## `RegInit` manually
+## `RegInit` manually (using `when`)
 
 ```scala
 val r = Reg(UInt(32.W)) // NOTE: implicit clock
 r := 1.U
 // when cannot use Scala's if as those are evaluated at elaboration
 //(are equal to Verilog's `generate if`)
-when(reset) { // will add special HW AST that will emit if in Verilog
+when(reset) { // will add special HW AST that will emit `if` in Verilog
   r := 0.U
 }.elsewhen(false.B) {
   // never
@@ -420,14 +446,8 @@ always @(posedge clock) begin
   if (reset)
     r <= 0;
   else
-    r <= 1;
+    r <= 2;
 end
-```
-
-## `chisel3.util.Counter`
-
-```scala
-val (count: UInt, wrap: Bool) = Counter(0 until 40000, enabled, reset)
 ```
 
 ## Switch
@@ -485,17 +505,95 @@ switch(digit) {
 </div>
 </div>
 
-## And much more
+# Testing
+
+<div class="container">
+<div class="col">
+
+```verilog
+module tb_GPI;
+    // Declare testbench signals
+    logic clock;
+    logic reset;
+    logic [4:0] address;
+    logic [31:0] rd_data;
+    // ...
+
+    // Instantiate the GPI module
+    GPI dut (
+        .clock(clock),
+        .reset(reset),
+        .address(address),
+        .rd_data(rd_data),
+        // ...
+    );
+
+    // Clock generation
+    initial begin
+        clock = 0;
+        forever #5 clock = ~clock; // 100 MHz clock
+    end
+
+    // Test sequence
+    initial begin
+        // Initialize signals
+        reset = 1;
+        address = 5'b0;
+
+        // Apply reset
+        #10;
+        reset = 0;
+
+        #20;
+        assert (rd_data == 0);
+
+        $finish;
+    end
+endmodule
+```
+
+</div>
+<div class="col">
+
+```scala
+class GPISpec extends AnyFreeSpec with Matchers {
+  "GPI should work" in {
+    simulate(new GPI()) { dut =>
+      // Initialize signals
+      dut.reset.poke(true.B)
+      dut.slot_io.address.poke(0.U)
+
+      // Apply reset
+      dut.clock.step(1)
+      dut.reset.poke(false.B)
+
+      dut.clock.step(2)
+      dut.slot_io.rd_data.expect(0.U)
+    }
+  }
+}
+```
+
+</div>
+</div>
+
+# Idiomatic Chisel
+
+Verilog can be simply mapped to Chisel, but such Chisel code is not idiomatic/optimal
+
+## `chisel3.util.Counter`
+
+```scala
+val (count: UInt, wrap: Bool) = Counter(0 until 40000, enabled, reset)
+```
+
+## More high level constructs
 
 - `DecoupledIO` bundle with ready-valid interface
 - `UIntToOH` & `OHToUInt` for one-hot encoding/decoding
 - `Mux1H(sel: Seq[Bool], in: Seq[Data])`
 - `ShiftRegister(in: Data, n: Int[, en: Bool]): Data`
 - and much more in [Chisel cheatsheet](https://github.com/freechipsproject/chisel-cheatsheet/blob/master/chisel_cheatsheet-3.6.pdf)
-
-# Idiomatic Chisel
-
-As we saw, Verilog can be simply mapped to Chisel, but such Chisel code is not idiomatic/optimal. So after rewrite was done it was time to fix this too.
 
 ## Directly connecting instances
 
@@ -529,12 +627,13 @@ class FPRO extends Bundle {
 ## Reuse `Bundle`
 
 ```scala
-// this module consumes FPRO signals
-class mmio_controller extends Module {
-  val fp = IO(FPRO())
+// this module produces FPro signals
+class mcs_bridge extends Module {
+  val fp = Flipped(FPRO()) // flips Input <-> Output
   // ...
 }
 
+// this module passes down FPro signals
 class mmio_subsystem extends Module {
   val fp = IO(FPRO())
   // ...
@@ -543,9 +642,9 @@ class mmio_subsystem extends Module {
   // ...
 }
 
-// this module produces FPRO signals
-class mcs_bridge extends Module {
-  val fp = Flipped(FPRO()) // flips Input <-> Output
+// this module consumes FPro signals
+class mmio_controller extends Module {
+  val fp = IO(FPRO())
   // ...
 }
 ```
@@ -553,6 +652,7 @@ class mcs_bridge extends Module {
 ## Using `trait` for interfaces
 
 ```scala
+// define common interface for MMIO core
 trait MMIO_core {
   val slot_io = IO(new Slot())
 }
@@ -571,7 +671,7 @@ class GPO extends Module with MMIO_core {
 }
 ```
 
-## This allows dynamic core connections
+## for easier core additions
 
 ```scala
 var slots: Array[MMIO_core] = Array()
@@ -590,23 +690,20 @@ slots :+= gpi
 
 require(slots.length < 64)
 for ((core, i) <- slots.zipWithIndex) {
-  core.slot_io.address <> slot.reg_addr(i)
-  core.slot_io.rd_data <> slot.read_data(i)
-  core.slot_io.wr_data <> slot.write_data(i)
-  core.slot_io.read <> slot.read(i)
-  core.slot_io.write <> slot.write(i)
-  core.slot_io.cs <> slot.cs(i)
+  core.slot_io.address <> reg_addr(i)
+  core.slot_io.rd_data <> read_data(i)
+  core.slot_io.wr_data <> write_data(i)
+  core.slot_io.read <> read(i)
+  core.slot_io.write <> write(i)
+  core.slot_io.cs <> cs(i)
 }
 ```
 
-# Known chisel problems
+# More details in GitHub repo
 
-- some stuff is badly documented
-- unpacked array not supported, but we can use [packed arrays](https://verificationguide.com/systemverilog/systemverilog-packed-and-unpacked-array/) that only require magic options (again bad docs) `scalarize-ext-modules`
-- sizes are not really typed (they are checked in elaboration process)
-- feature not a bug: all ports/wires need to be connected, one can use `DontCare`
+<https://github.com/schtrudl/cpro>
 
-# Know Vivaldo problems
+# Discovered Vivaldo problems
 
 - associate ELF does not work correctly if MCS is not in top module
 - vivaldo does not check folder for new files so folder needs to be reimported

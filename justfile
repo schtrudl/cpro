@@ -12,4 +12,4 @@ test:
     sbt test
 
 slides:
-    pandoc -F mermaid-filter --standalone -t revealjs -s -o slides.html slides.md --include-in-header=header-slides.html --slide-level=2
+    pandoc -F mermaid-filter --standalone -t revealjs -s -o slides.html slides.md --include-in-header=header-slides.html --slide-level=2 --highlight-style=vscodium-dark.theme

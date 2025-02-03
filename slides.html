@@ -57,43 +57,44 @@
         -khtml-user-select: none; -moz-user-select: none;
         -ms-user-select: none; user-select: none;
         padding: 0 4px; width: 4em;
-        color: #aaaaaa;
       }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
     div.sourceCode
-      {   }
+      { color: #d4d4d4;  }
     @media screen {
     pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
     }
-    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-    code span.at { color: #7d9029; } /* Attribute */
-    code span.bn { color: #40a070; } /* BaseN */
-    code span.bu { color: #008000; } /* BuiltIn */
-    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #4070a0; } /* Char */
-    code span.cn { color: #880000; } /* Constant */
-    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-    code span.dt { color: #902000; } /* DataType */
-    code span.dv { color: #40a070; } /* DecVal */
-    code span.er { color: #ff0000; font-weight: bold; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #40a070; } /* Float */
-    code span.fu { color: #06287e; } /* Function */
-    code span.im { color: #008000; font-weight: bold; } /* Import */
-    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-    code span.op { color: #666666; } /* Operator */
-    code span.ot { color: #007020; } /* Other */
-    code span.pp { color: #bc7a00; } /* Preprocessor */
-    code span.sc { color: #4070a0; } /* SpecialChar */
-    code span.ss { color: #bb6688; } /* SpecialString */
-    code span.st { color: #4070a0; } /* String */
-    code span.va { color: #19177c; } /* Variable */
-    code span.vs { color: #4070a0; } /* VerbatimString */
-    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    code span { color: #d4d4d4; } /* Normal */
+    code span.al { color: #bf616a; background-color: #252b34; font-weight: bold; } /* Alert */
+    code span.an { color: #569cd6; font-style: italic; } /* Annotation */
+    code span.at { color: #9cdcfe; font-style: italic; } /* Attribute */
+    code span.bn { color: #b5cea8; } /* BaseN */
+    code span.bu { color: #4ec9b0; } /* BuiltIn */
+    code span.cf { color: #c586c0; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #ce9178; } /* Char */
+    code span.cn { color: #569cd6; } /* Constant */
+    code span.co { color: #6a9955; } /* Comment */
+    code span.cv { color: #9cdcfe; } /* CommentVar */
+    code span.do { color: #569cd6; } /* Documentation */
+    code span.dt { color: #569cd6; } /* DataType */
+    code span.dv { color: #b5cea8; } /* DecVal */
+    code span.er { color: #f44747; text-decoration: underline; } /* Error */
+    code span.ex { color: #5e81ac; } /* Extension */
+    code span.fl { color: #b5cea8; } /* Float */
+    code span.fu { color: #dcdcaa; } /* Function */
+    code span.im { color: #c586c0; } /* Import */
+    code span.in { color: #ebcb8b; } /* Information */
+    code span.kw { color: #569cd6; font-weight: bold; } /* Keyword */
+    code span.op { color: #d4d4d4; } /* Operator */
+    code span.ot { color: #9cdcfe; } /* Other */
+    code span.pp { color: #569cd6; } /* Preprocessor */
+    code span.re { color: #88c0d0; background-color: #252b34; } /* RegionMarker */
+    code span.sc { color: #d7ba7d; } /* SpecialChar */
+    code span.ss { color: #d16969; } /* SpecialString */
+    code span.st { color: #ce9178; } /* String */
+    code span.va { color: #9cdcfe; } /* Variable */
+    code span.vs { color: #ce9178; } /* VerbatimString */
+    code span.wa { color: #bf616a; } /* Warning */
   </style>
   <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/black.css" id="theme">
   <style>
@@ -189,15 +190,9 @@ Verilog compilation.</p>
 <p><img
 data-src="data:image/png;base64,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"
 alt="" /></p>
-</section>
 <aside class="notes">
-<section id="compilation" class="slide level2">
-<h2>Compilation</h2>
 <p>Chisel gets compiled (as Scala) to JVM, which is then executed (this
 is usually done by <code>sbt run</code> command).</p>
-</section>
-<section id="elaboration" class="slide level2">
-<h2>Elaboration</h2>
 <p>Is execution on Chisel compiled program, which during construction of
 <code>Top</code> class (and it’s subsequent classes) add hardware AST
 (CHIRRTL) to <code>ChiselStage</code>. Each <code>Module</code> class
@@ -206,15 +201,48 @@ SystemVerilog module). Other classes are inlined into first parent
 <code>Module</code> class. This part does hardware generation, from
 parametrized constructs to concrete hardware AST (modules). Each
 iteration of loops just adds more hardware AST nodes to stage.</p>
-</section>
-<section id="circuit-ir-compilers-and-tools" class="slide level2">
-<h2>Circuit IR Compilers and Tools</h2>
 <p>Scala FIRRTL (SFC) lowers CHIRRTL to FIRRTL, on which FIRRTL
 compilers apply some transformations (optimizations; ex: for unused
 signals) and lower it to MLIR that get optimized further and compiled
 into targeted language (usually SystemVerilog).</p>
+</aside>
 </section>
-</aside></section>
+<section id="elaboration" class="slide level2">
+<h2>Elaboration</h2>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// The body of a Scala class is the default constructor</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">// MyModule&#39;s default constructor has a single Int argument</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Superclass Module is a chisel3 Class that begins construction of a hardware module</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Implicit clock and reset inputs are added by the Module constructor</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> <span class="fu">MyModule</span><span class="op">(</span>width<span class="op">:</span> <span class="bu">Int</span><span class="op">)</span> <span class="kw">extends</span> Module <span class="op">{</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// io is a required field for subclasses of Module</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// new Bundle creates an instance of an anonymous subclass of Chisel&#39;s Bundle (like a struct)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// When executing the function IO(...), Chisel adds ports to the Module based on the Bundle object</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> io <span class="op">=</span> <span class="fu">IO</span><span class="op">(</span><span class="kw">new</span> Bundle <span class="op">{</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">val</span> in <span class="op">=</span> <span class="fu">Input</span><span class="op">(</span><span class="fu">UInt</span><span class="op">(</span>width<span class="op">.</span>W<span class="op">))</span> <span class="co">// Input port with width defined by parameter</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">val</span> out <span class="op">=</span> <span class="fu">Output</span><span class="op">(</span><span class="fu">UInt</span><span class="op">())</span> <span class="co">// Output port with width inferred by Chisel</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">})</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">// A Scala println that will print at elaboration time each time this Module is instantiated</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">// This does NOT create a node in the Module AST</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">println</span><span class="op">(</span><span class="ss">s&quot;</span><span class="st">Constructing MyModule with width </span><span class="ss">$width&quot;</span><span class="op">)</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Adds a register declaration node to the Module AST</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">// This counter register resets to the value of input port io.in</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">// The implicit clock and reset inputs feed into this node</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> counter <span class="op">=</span> <span class="fu">RegInit</span><span class="op">(</span>io<span class="op">.</span>in<span class="op">)</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Adds an addition node to the hardware AST with operands counter and 1</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> inc <span class="op">=</span> counter <span class="op">+</span> <span class="fl">1.</span>U <span class="co">// + is overloaded, this is actually a Chisel function call</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Connects the output of the addition node to the &quot;next&quot; value of counter</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  counter <span class="op">:=</span> inc</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Adds a printf node to the Module AST that will print at simulation time</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">// The value of counter feeds into this node</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">printf</span><span class="op">(</span><span class="st">&quot;counter = %d</span><span class="ch">\n</span><span class="st">&quot;</span><span class="op">,</span> counter<span class="op">)</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</section></section>
 <section>
 <section id="design-flow-in-chisel" class="title-slide slide level1">
 <h1>Design flow in Chisel</h1>
@@ -252,45 +280,45 @@ interface/signature not actual implementation and are not type checked
 (mismatch between Verilog and Chisel <code>BlackBox</code> will cause
 error in simulation/synthesis if you are lucky).</p>
 </aside>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode scala"><code class="sourceCode scala"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">/*</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">module Top(</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">  input         clock,</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">                reset,</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">  input  [15:0] sw,</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">  output [15:0] led,</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">  output [7:0]  anode_assert,</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">  output [6:0]  segs</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">);</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Top <span class="kw">extends</span> BlackBox <span class="kw">with</span> HasBlackBoxResource <span class="op">{</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> io <span class="op">=</span> <span class="fu">IO</span><span class="op">(</span><span class="kw">new</span> Bundle <span class="op">{</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// in blackbox we need to explicitly provide clock&amp;reset</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">val</span> clock <span class="op">=</span> <span class="fu">Input</span><span class="op">(</span><span class="fu">Clock</span><span class="op">())</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">val</span> reset <span class="op">=</span> <span class="fu">Input</span><span class="op">(</span><span class="fu">Reset</span><span class="op">())</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">val</span> sw <span class="op">=</span> <span class="fu">Input</span><span class="op">(</span><span class="fu">UInt</span><span class="op">(</span><span class="fl">16.</span>W<span class="op">))</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">val</span> led <span class="op">=</span> <span class="fu">Output</span><span class="op">(</span><span class="fu">UInt</span><span class="op">(</span><span class="fl">16.</span>W<span class="op">))</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">val</span> anode_assert <span class="op">=</span> <span class="fu">Output</span><span class="op">(</span><span class="fu">UInt</span><span class="op">(</span><span class="fl">8.</span>W<span class="op">))</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">val</span> segs <span class="op">=</span> <span class="fu">Output</span><span class="op">(</span><span class="fu">UInt</span><span class="op">(</span><span class="fl">7.</span>W<span class="op">))</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="op">})</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="co">// will copy resource files into target_sv</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addResource</span><span class="op">(</span><span class="st">&quot;/top.sv&quot;</span><span class="op">)</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addResource</span><span class="op">(</span><span class="st">&quot;/mcs_bridge.sv&quot;</span><span class="op">)</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addResource</span><span class="op">(</span><span class="st">&quot;/mmio_controller.sv&quot;</span><span class="op">)</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addResource</span><span class="op">(</span><span class="st">&quot;/mmio_cores.sv&quot;</span><span class="op">)</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addResource</span><span class="op">(</span><span class="st">&quot;/mmio_subsystem.sv&quot;</span><span class="op">)</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">/*</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">module Top(</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">  input         clock,</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">                reset,</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">  input  [15:0] sw,</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">  output [15:0] led,</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">  output [7:0]  anode_assert,</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">  output [6:0]  segs</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">);</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Top <span class="kw">extends</span> BlackBox <span class="kw">with</span> HasBlackBoxResource <span class="op">{</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> io <span class="op">=</span> <span class="fu">IO</span><span class="op">(</span><span class="kw">new</span> Bundle <span class="op">{</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// in blackbox we need to explicitly provide clock&amp;reset</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">val</span> clock <span class="op">=</span> <span class="fu">Input</span><span class="op">(</span><span class="fu">Clock</span><span class="op">())</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">val</span> reset <span class="op">=</span> <span class="fu">Input</span><span class="op">(</span><span class="fu">Reset</span><span class="op">())</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">val</span> sw <span class="op">=</span> <span class="fu">Input</span><span class="op">(</span><span class="fu">UInt</span><span class="op">(</span><span class="fl">16.</span>W<span class="op">))</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">val</span> led <span class="op">=</span> <span class="fu">Output</span><span class="op">(</span><span class="fu">UInt</span><span class="op">(</span><span class="fl">16.</span>W<span class="op">))</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">val</span> anode_assert <span class="op">=</span> <span class="fu">Output</span><span class="op">(</span><span class="fu">UInt</span><span class="op">(</span><span class="fl">8.</span>W<span class="op">))</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">val</span> segs <span class="op">=</span> <span class="fu">Output</span><span class="op">(</span><span class="fu">UInt</span><span class="op">(</span><span class="fl">7.</span>W<span class="op">))</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="op">})</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="co">// will copy resource files into target_sv</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addResource</span><span class="op">(</span><span class="st">&quot;/top.sv&quot;</span><span class="op">)</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addResource</span><span class="op">(</span><span class="st">&quot;/mcs_bridge.sv&quot;</span><span class="op">)</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addResource</span><span class="op">(</span><span class="st">&quot;/mmio_controller.sv&quot;</span><span class="op">)</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addResource</span><span class="op">(</span><span class="st">&quot;/mmio_cores.sv&quot;</span><span class="op">)</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addResource</span><span class="op">(</span><span class="st">&quot;/mmio_subsystem.sv&quot;</span><span class="op">)</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="chiselstage" class="slide level2">
 <h2><code>ChiselStage</code></h2>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode scala"><code class="sourceCode scala"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">object</span> Top <span class="kw">extends</span> App <span class="op">{</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  ChiselStage<span class="op">.</span><span class="fu">emitSystemVerilogFile</span><span class="op">(</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">new</span> Top<span class="op">,</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Array</span><span class="op">(</span><span class="st">&quot;--split-verilog&quot;</span><span class="op">,</span> <span class="st">&quot;--target-dir&quot;</span><span class="op">,</span> <span class="st">&quot;target_sv/&quot;</span><span class="op">),</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    firtoolOpts <span class="op">=</span> <span class="ex">Array</span><span class="op">(</span><span class="st">&quot;-disable-all-randomization&quot;</span><span class="op">,</span> <span class="st">&quot;-strip-debug-info&quot;</span><span class="op">)</span> <span class="co">// make verilog human readable</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">)</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">object</span> Top <span class="kw">extends</span> App <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  ChiselStage<span class="op">.</span><span class="fu">emitSystemVerilogFile</span><span class="op">(</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">new</span> Top<span class="op">,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">Array</span><span class="op">(</span><span class="st">&quot;--split-verilog&quot;</span><span class="op">,</span> <span class="st">&quot;--target-dir&quot;</span><span class="op">,</span> <span class="st">&quot;target_sv/&quot;</span><span class="op">),</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    firtoolOpts <span class="op">=</span> <span class="ex">Array</span><span class="op">(</span><span class="st">&quot;-disable-all-randomization&quot;</span><span class="op">,</span> <span class="st">&quot;-strip-debug-info&quot;</span><span class="op">)</span> <span class="co">// make verilog human readable</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">)</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <aside class="notes">
 <p>Lastly I setup <code>ChiselStage</code> to emit SystemVerilog files
 into target_sv directory.</p>
@@ -331,114 +359,15 @@ Chisel, more on that later.</p>
 <h1>Verilog -&gt; Chisel</h1>
 
 </section>
-<section id="module-definition" class="slide level2">
-<h2><code>Module</code> definition</h2>
-<div class="container">
-<div class="col">
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> M</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>#<span class="op">(</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">parameter</span> ARG <span class="op">=</span> <span class="bn">32&#39;hc000_0000</span>  </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="op">)</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="op">(</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> logic clock<span class="op">,</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> logic reset<span class="op">,</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> logic inn<span class="op">,</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> logic <span class="op">[</span><span class="dv">31</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> inn_<span class="op">,</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> logic <span class="op">[</span><span class="dv">63</span><span class="op">:</span><span class="dv">0</span><span class="op">][</span><span class="dv">31</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> inn_arr<span class="op">,</span> <span class="co">// Packed array</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Chisel does not support unpacked arrays: [31:0] inn_arr [63:0]</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">output</span> logic out<span class="op">,</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">output</span> logic <span class="op">[</span><span class="dv">31</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> out_<span class="op">,</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">output</span> logic <span class="op">[</span><span class="dv">63</span><span class="op">:</span><span class="dv">0</span><span class="op">][</span><span class="dv">31</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> out_arr<span class="op">,</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">//...</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="kw">endmodule</span></span></code></pre></div>
-</div>
-<div class="col">
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode scala"><code class="sourceCode scala"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// whole class definition is actually class constructor</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> <span class="fu">M</span><span class="op">(</span>ARG<span class="op">:</span> <span class="ex">Long</span> <span class="op">=</span> <span class="bn">0xc000</span>_0000L<span class="op">)</span> <span class="kw">extends</span> Module <span class="op">{</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">require</span><span class="op">(</span>ARG <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span> <span class="co">// assert assumptions</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">/*</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">    // Module has implicit clock&amp;reset signals</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">    val clock = Input(Clock())</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">    val reset = Input(Reset())</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">    */</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// all IO connections are typically joined in IO Bundle</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">val</span> io <span class="op">=</span> <span class="fu">IO</span><span class="op">(</span><span class="kw">new</span> Bundle <span class="op">{</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="kw">val</span> inn <span class="op">=</span> <span class="fu">Input</span><span class="op">(</span><span class="fu">Bool</span><span class="op">())</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        <span class="kw">val</span> inn_ <span class="op">=</span> <span class="fu">Input</span><span class="op">(</span><span class="fu">UInt</span><span class="op">(</span><span class="fl">32.</span>W<span class="co">/*idth*/</span><span class="op">))</span> <span class="co">// common pitfall: [31:0] has width of 32 not 31</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        <span class="kw">val</span> inn_arr <span class="op">=</span> <span class="fu">Input</span><span class="op">(</span><span class="fu">Vec</span><span class="op">(</span><span class="dv">64</span><span class="op">,</span> <span class="fu">UInt</span><span class="op">(</span><span class="fl">32.</span>W<span class="op">)))</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">// To consider vectors as packed arrays instead of scalarized inputs</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        <span class="co">// the following options are needed to be passed to firtool:</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        <span class="co">// -preserve-aggregate=all -scalarize-public-modules=false -scalarize-ext-modules=false</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>        <span class="kw">val</span> out <span class="op">=</span> <span class="fu">Output</span><span class="op">(</span><span class="fu">Bool</span><span class="op">())</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>        <span class="kw">val</span> out_ <span class="op">=</span> <span class="fu">Output</span><span class="op">(</span><span class="fu">UInt</span><span class="op">(</span><span class="fl">32.</span>W<span class="op">))</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>        <span class="kw">val</span> out_arr <span class="op">=</span> <span class="fu">Output</span><span class="op">(</span><span class="fu">Vec</span><span class="op">(</span><span class="dv">64</span><span class="op">,</span> <span class="fu">UInt</span><span class="op">(</span><span class="fl">32.</span>W<span class="op">)))</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">})</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-</div>
-</div>
-</section>
-<section id="module-instantiation" class="slide level2">
-<h2>Module instantiation</h2>
-<div class="container">
-<div class="col">
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>M m <span class="op">(</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    .inn     <span class="op">(</span>_inn<span class="op">),</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    .inn_    <span class="op">(</span>_inn_<span class="op">),</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    .inn_arr <span class="op">(</span>_inn_arr<span class="op">),</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    .out     <span class="op">(</span>_out<span class="op">),</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    .out_    <span class="op">(</span>_out_<span class="op">),</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    .out_arr <span class="op">(</span>_out_arr<span class="op">),</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span></code></pre></div>
-</div>
-<div class="col">
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode scala"><code class="sourceCode scala"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> m <span class="op">=</span> <span class="fu">Module</span><span class="op">(</span><span class="kw">new</span> M<span class="op">)</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">/*</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">// implicit clock&amp;reset signals are automatically connected</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">m.clock &lt;&gt; clock</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">m.reset &lt;&gt; reset</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>m<span class="op">.</span>io<span class="op">.</span>inn <span class="op">&lt;&gt;</span> _inn</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>m<span class="op">.</span>io<span class="op">.</span>inn_ <span class="op">&lt;&gt;</span> _inn_</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>m<span class="op">.</span>io<span class="op">.</span>inn_arr <span class="op">&lt;&gt;</span> _inn_arr</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>m<span class="op">.</span>io<span class="op">.</span>out <span class="op">&lt;&gt;</span> _out</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>m<span class="op">.</span>io<span class="op">.</span>out_ <span class="op">&lt;&gt;</span> _out_</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>m<span class="op">.</span>io<span class="op">.</span>out_arr <span class="op">&lt;&gt;</span> _out_arr</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">// or if we use :=</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>m<span class="op">.</span>io<span class="op">.</span>inn <span class="op">:=</span> _inn</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>m<span class="op">.</span>io<span class="op">.</span>inn_ <span class="op">:=</span> _inn_</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>m<span class="op">.</span>io<span class="op">.</span>inn_arr <span class="op">:=</span> _inn_arr</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>_out <span class="op">:=</span> m<span class="op">.</span>io<span class="op">.</span>out</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>_out_ <span class="op">:=</span> m<span class="op">.</span>io<span class="op">.</span>out_</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>_out_arr <span class="op">:=</span> m<span class="op">.</span>io<span class="op">.</span>out_arr</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co">// if any connections are missing we get elaboration error</span></span></code></pre></div>
-</div>
-</div>
-</section>
-<section id="section" class="slide level2">
-<h2><code>=</code>,<code>:=</code>,<code>&lt;&gt;</code></h2>
-<ul>
-<li><p><code>=</code> is Scala assignment (evaluated at elaboration
-time)</p></li>
-<li><p><code>sink := source</code> is Chisel (mono-directional)
-assignment (<code>assign =</code>, <code>&lt;=</code>)</p></li>
-<li><p><code>&lt;&gt;</code> is Chisel bi-directional connection
-operator (<code>assign =</code>)</p></li>
-</ul>
-</section>
-<section id="data-classes" class="slide level2">
-<h2><code>Data</code> classes</h2>
-<p><img
-data-src="https://raw.githubusercontent.com/chipsalliance/chisel3/master/docs/src/images/type_hierarchy.svg" /></p>
+<section id="data" class="slide level2">
+<h2><code>Data</code></h2>
+<figure>
+<img
+data-src="https://raw.githubusercontent.com/chipsalliance/chisel3/master/docs/src/images/type_hierarchy.svg"
+alt="Data can be represented as a bit vector in a hardware design" />
+<figcaption aria-hidden="true"><sup>Data can be represented as a bit
+vector in a hardware design</sup></figcaption>
+</figure>
 <aside class="notes">
 <p>All Chisel types have <code>Data</code> for superclass. Every
 <code>Data</code> class can be represented as a bit vector in a hardware
@@ -454,9 +383,9 @@ representation of Z or X states.</p>
 <section id="uint" class="slide level2">
 <h2><code>UInt</code></h2>
 <p><code>value.U(width.W)</code></p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode scala"><code class="sourceCode scala"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bn">0xA0</span><span class="op">.</span><span class="fu">U</span><span class="op">(</span><span class="fl">16.</span>W<span class="op">)</span> <span class="co">// this can be problematic if we overflow Scala integer</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;hA0&quot;</span><span class="op">.</span><span class="fu">U</span><span class="op">(</span><span class="fl">16.</span>W<span class="op">)</span> <span class="co">// so string literals are preferred</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bn">0xA0</span><span class="op">.</span><span class="fu">U</span><span class="op">(</span><span class="fl">16.</span>W<span class="op">)</span> <span class="co">// this can be problematic if we overflow Scala integer</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;hA0&quot;</span><span class="op">.</span><span class="fu">U</span><span class="op">(</span><span class="fl">16.</span>W<span class="op">)</span> <span class="co">// so string literals are preferred</span></span></code></pre></div>
 </section>
 <section id="slices" class="slide level2">
 <h2>slices</h2>
@@ -484,56 +413,155 @@ class="sourceCode scala"><code class="sourceCode scala"><span id="cb8-1"><a href
 <p>Chisel does not support slice/subword assignment, but that limitation
 can be bypassed by conCATenation or by transmuting to <code>Vec</code>
 or <code>Bundle</code></p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode scala"><code class="sourceCode scala"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> data <span class="op">=</span> <span class="fl">0.</span><span class="fu">U</span><span class="op">(</span><span class="fl">8.</span>W<span class="op">)</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> ones <span class="op">=</span> chisel3<span class="op">.</span>util<span class="op">.</span><span class="fu">Fill</span><span class="op">(</span><span class="dv">4</span><span class="op">,</span> <span class="fl">1.</span>U<span class="op">)</span> <span class="co">// 0b1111</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">// {4{1}}</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> data2 <span class="op">=</span> chisel3<span class="op">.</span>util<span class="op">.</span><span class="fu">Cat</span><span class="op">(</span>data<span class="op">,</span> ones<span class="op">).</span><span class="fu">U</span><span class="op">(</span><span class="fl">8.</span>W<span class="op">)</span> <span class="co">// 0b0000_1111</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">// {data,ones}</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> data22 <span class="op">=</span> chisel3<span class="op">.</span>util<span class="op">.</span><span class="fu">Cat</span><span class="op">(</span><span class="fu">data</span><span class="op">(</span><span class="dv">7</span><span class="op">,</span><span class="dv">4</span><span class="op">),</span> ones<span class="op">)</span> <span class="co">// 0b0000_1111</span></span></code></pre></div>
-<div class="note">
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> data <span class="op">=</span> <span class="fl">0.</span><span class="fu">U</span><span class="op">(</span><span class="fl">8.</span>W<span class="op">)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> ones <span class="op">=</span> chisel3<span class="op">.</span>util<span class="op">.</span><span class="fu">Fill</span><span class="op">(</span><span class="dv">4</span><span class="op">,</span> <span class="fl">1.</span>U<span class="op">)</span> <span class="co">// 0b1111</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">// {4{1}}</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> data2 <span class="op">=</span> chisel3<span class="op">.</span>util<span class="op">.</span><span class="fu">Cat</span><span class="op">(</span>data<span class="op">,</span> ones<span class="op">).</span><span class="fu">U</span><span class="op">(</span><span class="fl">8.</span>W<span class="op">)</span> <span class="co">// 0b0000_1111</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">// {data,ones}</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> data22 <span class="op">=</span> chisel3<span class="op">.</span>util<span class="op">.</span><span class="fu">Cat</span><span class="op">(</span><span class="fu">data</span><span class="op">(</span><span class="dv">7</span><span class="op">,</span><span class="dv">4</span><span class="op">),</span> ones<span class="op">)</span> <span class="co">// 0b0000_1111</span></span></code></pre></div>
+<aside class="notes">
 <p>The reason for this is that subword assignment generally hints at a
 better abstraction with an aggregate/structured types.</p>
-</div>
+</aside>
 </section>
 <section id="vec" class="slide level2">
 <h2><code>Vec</code></h2>
 <p><code>Vec</code>tors are like arrays. They have fixed size of same
 type/size elements. This restriction is relaxed in
 <code>MixedVec</code></p>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode scala"><code class="sourceCode scala"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> a <span class="op">=</span> <span class="fu">Vec</span><span class="op">(</span><span class="dv">4</span><span class="op">,</span> <span class="fu">Bool</span><span class="op">())</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">// with default options this becomes:</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">/*</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">logic a_0;</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">logic a_1;</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">logic a_2;</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">logic a_3;</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> a <span class="op">=</span> <span class="fu">Vec</span><span class="op">(</span><span class="dv">4</span><span class="op">,</span> <span class="fu">Bool</span><span class="op">())</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">// with default options this becomes:</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">/*</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">logic a_0;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">logic a_1;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">logic a_2;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">logic a_3;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span></code></pre></div>
 </section>
 <section id="bundle" class="slide level2">
 <h2><code>Bundle</code></h2>
 <p>Are like <code>struct</code> in C, they group together several named
 fields. This is mostly used to group ports (module inputs/outputs) into
 Bundles.</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> b <span class="op">=</span> <span class="kw">new</span> <span class="fu">Bundle</span><span class="op">({</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> a <span class="op">=</span> <span class="fu">Bool</span><span class="op">()</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> b <span class="op">=</span> <span class="fu">Bool</span><span class="op">()</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> c <span class="op">=</span> <span class="fu">Bool</span><span class="op">()</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="op">})</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">/*</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">logic b_a</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">logic b_b</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">logic b_c</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span></code></pre></div>
+</section>
+<section id="module-definition" class="slide level2">
+<h2><code>Module</code> definition</h2>
+<div class="container">
+<div class="col">
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> M</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>#<span class="op">(</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">parameter</span> ARG <span class="op">=</span> <span class="bn">32&#39;hc000_0000</span>  </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="op">)</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="op">(</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> logic clock<span class="op">,</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> logic reset<span class="op">,</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> logic inn<span class="op">,</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> logic <span class="op">[</span><span class="dv">31</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> inn_<span class="op">,</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">input</span> logic <span class="op">[</span><span class="dv">63</span><span class="op">:</span><span class="dv">0</span><span class="op">][</span><span class="dv">31</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> inn_arr<span class="op">,</span> <span class="co">// Packed array</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Chisel does not support unpacked arrays: [31:0] inn_arr [63:0]</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">output</span> logic out<span class="op">,</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">output</span> logic <span class="op">[</span><span class="dv">31</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> out_<span class="op">,</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">output</span> logic <span class="op">[</span><span class="dv">63</span><span class="op">:</span><span class="dv">0</span><span class="op">][</span><span class="dv">31</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> out_arr<span class="op">,</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">//...</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="kw">endmodule</span></span></code></pre></div>
+</div>
+<div class="col">
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// whole class definition is actually class constructor</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> <span class="fu">M</span><span class="op">(</span>ARG<span class="op">:</span> <span class="ex">Long</span> <span class="op">=</span> <span class="bn">0xc000</span>_0000L<span class="op">)</span> <span class="kw">extends</span> Module <span class="op">{</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">require</span><span class="op">(</span>ARG <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span> <span class="co">// assert assumptions</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">/*</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">    // Module has implicit clock&amp;reset signals</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">    val clock = Input(Clock())</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">    val reset = Input(Reset())</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">    */</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// all IO connections are typically joined in IO Bundle</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">val</span> io <span class="op">=</span> <span class="fu">IO</span><span class="op">(</span><span class="kw">new</span> Bundle <span class="op">{</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>        <span class="kw">val</span> inn <span class="op">=</span> <span class="fu">Input</span><span class="op">(</span><span class="fu">Bool</span><span class="op">())</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>        <span class="kw">val</span> inn_ <span class="op">=</span> <span class="fu">Input</span><span class="op">(</span><span class="fu">UInt</span><span class="op">(</span><span class="fl">32.</span>W<span class="co">/*idth*/</span><span class="op">))</span> <span class="co">// common pitfall: [31:0] has width of 32 not 31</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        <span class="kw">val</span> inn_arr <span class="op">=</span> <span class="fu">Input</span><span class="op">(</span><span class="fu">Vec</span><span class="op">(</span><span class="dv">64</span><span class="op">,</span> <span class="fu">UInt</span><span class="op">(</span><span class="fl">32.</span>W<span class="op">)))</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">// To consider vectors as packed arrays instead of scalarized inputs</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>        <span class="co">// the following options are needed to be passed to firtool:</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>        <span class="co">// -preserve-aggregate=all -scalarize-public-modules=false -scalarize-ext-modules=false</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>        <span class="kw">val</span> out <span class="op">=</span> <span class="fu">Output</span><span class="op">(</span><span class="fu">Bool</span><span class="op">())</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>        <span class="kw">val</span> out_ <span class="op">=</span> <span class="fu">Output</span><span class="op">(</span><span class="fu">UInt</span><span class="op">(</span><span class="fl">32.</span>W<span class="op">))</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>        <span class="kw">val</span> out_arr <span class="op">=</span> <span class="fu">Output</span><span class="op">(</span><span class="fu">Vec</span><span class="op">(</span><span class="dv">64</span><span class="op">,</span> <span class="fu">UInt</span><span class="op">(</span><span class="fl">32.</span>W<span class="op">)))</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">})</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</div>
+</div>
+</section>
+<section id="module-instantiation" class="slide level2">
+<h2>Module instantiation</h2>
+<div class="container">
+<div class="col">
 <div class="sourceCode" id="cb11"><pre
-class="sourceCode scala"><code class="sourceCode scala"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> b <span class="op">=</span> <span class="kw">new</span> <span class="fu">Bundle</span><span class="op">({</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> a <span class="op">=</span> <span class="fu">Bool</span><span class="op">()</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> b <span class="op">=</span> <span class="fu">Bool</span><span class="op">()</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> c <span class="op">=</span> <span class="fu">Bool</span><span class="op">()</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="op">})</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">/*</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">logic b_a</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">logic b_b</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">logic b_c</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span></code></pre></div>
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>M m <span class="op">(</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    .inn     <span class="op">(</span>_inn<span class="op">),</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    .inn_    <span class="op">(</span>_inn_<span class="op">),</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    .inn_arr <span class="op">(</span>_inn_arr<span class="op">),</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    .out     <span class="op">(</span>_out<span class="op">),</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    .out_    <span class="op">(</span>_out_<span class="op">),</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    .out_arr <span class="op">(</span>_out_arr<span class="op">),</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span></code></pre></div>
+</div>
+<div class="col">
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> m <span class="op">=</span> <span class="fu">Module</span><span class="op">(</span><span class="kw">new</span> M<span class="op">)</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">/*</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">// implicit clock&amp;reset signals are automatically connected</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">m.clock &lt;&gt; clock</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">m.reset &lt;&gt; reset</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>m<span class="op">.</span>io<span class="op">.</span>inn <span class="op">&lt;&gt;</span> _inn</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>m<span class="op">.</span>io<span class="op">.</span>inn_ <span class="op">&lt;&gt;</span> _inn_</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>m<span class="op">.</span>io<span class="op">.</span>inn_arr <span class="op">&lt;&gt;</span> _inn_arr</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>m<span class="op">.</span>io<span class="op">.</span>out <span class="op">&lt;&gt;</span> _out</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>m<span class="op">.</span>io<span class="op">.</span>out_ <span class="op">&lt;&gt;</span> _out_</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>m<span class="op">.</span>io<span class="op">.</span>out_arr <span class="op">&lt;&gt;</span> _out_arr</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">// or if we use :=</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>m<span class="op">.</span>io<span class="op">.</span>inn <span class="op">:=</span> _inn</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>m<span class="op">.</span>io<span class="op">.</span>inn_ <span class="op">:=</span> _inn_</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>m<span class="op">.</span>io<span class="op">.</span>inn_arr <span class="op">:=</span> _inn_arr</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>_out <span class="op">:=</span> m<span class="op">.</span>io<span class="op">.</span>out</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>_out_ <span class="op">:=</span> m<span class="op">.</span>io<span class="op">.</span>out_</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>_out_arr <span class="op">:=</span> m<span class="op">.</span>io<span class="op">.</span>out_arr</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="co">// if any connections are missing we get elaboration error</span></span></code></pre></div>
+</div>
+</div>
+</section>
+<section id="section" class="slide level2">
+<h2><code>=</code>,<code>:=</code>,<code>&lt;&gt;</code></h2>
+<ul>
+<li><p><code>=</code> is Scala assignment (evaluated at elaboration
+time)</p></li>
+<li><p><code>sink := source</code> is Chisel (mono-directional)
+assignment (<code>assign =</code>, <code>&lt;=</code>)</p></li>
+<li><p><code>&lt;&gt;</code> is Chisel bi-directional connection
+operator (<code>assign =</code>)</p></li>
+</ul>
 </section>
 <section id="variables" class="slide level2">
-<h2>“Variables”</h2>
-<p>Any local constant <code>localparam a = 5</code> can be defined as
-normal Scala value <code>val a = 5</code>.</p>
-</section>
-<section id="variables-1" class="slide level2">
 <h2>“Variables”</h2>
 <aside class="notes">
 <p>There is no concept of <code>logic</code> because everything needs to
@@ -572,43 +600,38 @@ be typed, so you need to use reg or wire explicitly:</p>
 </section>
 <section id="reginit" class="slide level2">
 <h2><code>RegInit</code></h2>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode scala"><code class="sourceCode scala"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> r <span class="op">=</span> <span class="fu">RegInit</span><span class="op">(</span><span class="fl">0.</span><span class="fu">U</span><span class="op">(</span><span class="fl">32.</span>W<span class="op">))</span> <span class="co">// </span><span class="al">NOTE</span><span class="co">: implicit clock&amp;reset</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Chisel will automatically put reg assignments into always_ff block</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">// that is by default run on positive edge</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>r <span class="op">:=</span> <span class="fl">1.</span>U</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>r <span class="op">:=</span> <span class="fl">2.</span>U <span class="co">// last assignments wins</span></span></code></pre></div>
-</section>
-<section id="reginit-manually" class="slide level2">
-<h2><code>RegInit</code> manually</h2>
 <div class="sourceCode" id="cb13"><pre
-class="sourceCode scala"><code class="sourceCode scala"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> r <span class="op">=</span> <span class="fu">Reg</span><span class="op">(</span><span class="fu">UInt</span><span class="op">(</span><span class="fl">32.</span>W<span class="op">))</span> <span class="co">// </span><span class="al">NOTE</span><span class="co">: implicit clock</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>r <span class="op">:=</span> <span class="fl">1.</span>U</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">// when cannot use Scala&#39;s if as those are evaluated at elaboration</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">//(are equal to Verilog&#39;s `generate if`)</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">when</span><span class="op">(</span>reset<span class="op">)</span> <span class="op">{</span> <span class="co">// will add special HW AST that will emit if in Verilog</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  r <span class="op">:=</span> <span class="fl">0.</span>U</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="op">}.</span><span class="fu">elsewhen</span><span class="op">(</span><span class="kw">false</span><span class="op">.</span>B<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// never</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="op">}.</span>otherwise <span class="op">{</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  r <span class="op">:=</span> <span class="fl">2.</span>U</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> r <span class="op">=</span> <span class="fu">RegInit</span><span class="op">(</span><span class="fl">0.</span><span class="fu">U</span><span class="op">(</span><span class="fl">32.</span>W<span class="op">))</span> <span class="co">// </span><span class="al">NOTE</span><span class="co">: implicit clock&amp;reset</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Chisel will automatically put reg assignments into always_ff block</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">// that is by default run on positive edge</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>r <span class="op">:=</span> <span class="fl">1.</span>U</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>r <span class="op">:=</span> <span class="fl">2.</span>U <span class="co">// last assignments wins</span></span></code></pre></div>
+</section>
+<section id="reginit-manually-using-when" class="slide level2">
+<h2><code>RegInit</code> manually (using <code>when</code>)</h2>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> r <span class="op">=</span> <span class="fu">Reg</span><span class="op">(</span><span class="fu">UInt</span><span class="op">(</span><span class="fl">32.</span>W<span class="op">))</span> <span class="co">// </span><span class="al">NOTE</span><span class="co">: implicit clock</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>r <span class="op">:=</span> <span class="fl">1.</span>U</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">// when cannot use Scala&#39;s if as those are evaluated at elaboration</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">//(are equal to Verilog&#39;s `generate if`)</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">when</span><span class="op">(</span>reset<span class="op">)</span> <span class="op">{</span> <span class="co">// will add special HW AST that will emit `if` in Verilog</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  r <span class="op">:=</span> <span class="fl">0.</span>U</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="op">}.</span><span class="fu">elsewhen</span><span class="op">(</span><span class="kw">false</span><span class="op">.</span>B<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// never</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="op">}.</span>otherwise <span class="op">{</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  r <span class="op">:=</span> <span class="fl">2.</span>U</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="in-verilog" class="slide level2">
 <h2>in Verilog</h2>
-<div class="sourceCode" id="cb14"><pre
-class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">reg</span> <span class="op">[</span><span class="dv">31</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> r<span class="op">;</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">always</span> <span class="op">@(</span><span class="kw">posedge</span> clock<span class="op">)</span> <span class="kw">begin</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">if</span> <span class="op">(</span>reset<span class="op">)</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    r <span class="op">&lt;=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">else</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    r <span class="op">&lt;=</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
-</section>
-<section id="chisel3.util.counter" class="slide level2">
-<h2><code>chisel3.util.Counter</code></h2>
 <div class="sourceCode" id="cb15"><pre
-class="sourceCode scala"><code class="sourceCode scala"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> <span class="op">(</span>count<span class="op">:</span> UInt<span class="op">,</span> wrap<span class="op">:</span> Bool<span class="op">)</span> <span class="op">=</span> <span class="fu">Counter</span><span class="op">(</span><span class="dv">0</span> until <span class="dv">40000</span><span class="op">,</span> enabled<span class="op">,</span> reset<span class="op">)</span></span></code></pre></div>
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dt">reg</span> <span class="op">[</span><span class="dv">31</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> r<span class="op">;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">always</span> <span class="op">@(</span><span class="kw">posedge</span> clock<span class="op">)</span> <span class="kw">begin</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">if</span> <span class="op">(</span>reset<span class="op">)</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    r <span class="op">&lt;=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">else</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    r <span class="op">&lt;=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
 </section>
 <section id="switch" class="slide level2">
 <h2>Switch</h2>
@@ -658,9 +681,87 @@ class="sourceCode scala"><code class="sourceCode scala"><span id="cb17-1"><a hre
 <span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </div>
 </div>
+</section></section>
+<section id="testing" class="title-slide slide level1">
+<h1>Testing</h1>
+<div class="container">
+<div class="col">
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> tb_GPI<span class="op">;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Declare testbench signals</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    logic clock<span class="op">;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    logic reset<span class="op">;</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    logic <span class="op">[</span><span class="dv">4</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> address<span class="op">;</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    logic <span class="op">[</span><span class="dv">31</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> rd_data<span class="op">;</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Instantiate the GPI module</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    GPI dut <span class="op">(</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>        .clock<span class="op">(</span>clock<span class="op">),</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>        .reset<span class="op">(</span>reset<span class="op">),</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>        .address<span class="op">(</span>address<span class="op">),</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>        .rd_data<span class="op">(</span>rd_data<span class="op">),</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">// ...</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">);</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Clock generation</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">initial</span> <span class="kw">begin</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>        clock <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>        <span class="kw">forever</span> <span class="bn">#5</span> clock <span class="op">=</span> <span class="op">~</span>clock<span class="op">;</span> <span class="co">// 100 MHz clock</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Test sequence</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">initial</span> <span class="kw">begin</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Initialize signals</span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>        reset <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>        address <span class="op">=</span> <span class="bn">5&#39;b0</span><span class="op">;</span></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Apply reset</span></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>        <span class="bn">#10</span><span class="op">;</span></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>        reset <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>        <span class="bn">#20</span><span class="op">;</span></span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>        assert <span class="op">(</span>rd_data <span class="op">==</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>        <span class="dt">$finish</span><span class="op">;</span></span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a><span class="kw">endmodule</span></span></code></pre></div>
+</div>
+<div class="col">
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> GPISpec <span class="kw">extends</span> AnyFreeSpec <span class="kw">with</span> Matchers <span class="op">{</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;GPI should work&quot;</span> in <span class="op">{</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">simulate</span><span class="op">(</span><span class="kw">new</span> <span class="fu">GPI</span><span class="op">())</span> <span class="op">{</span> dut <span class="op">=&gt;</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>      <span class="co">// Initialize signals</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>      dut<span class="op">.</span>reset<span class="op">.</span><span class="fu">poke</span><span class="op">(</span><span class="kw">true</span><span class="op">.</span>B<span class="op">)</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>      dut<span class="op">.</span>slot_io<span class="op">.</span>address<span class="op">.</span><span class="fu">poke</span><span class="op">(</span><span class="fl">0.</span>U<span class="op">)</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>      <span class="co">// Apply reset</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>      dut<span class="op">.</span>clock<span class="op">.</span><span class="fu">step</span><span class="op">(</span><span class="dv">1</span><span class="op">)</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>      dut<span class="op">.</span>reset<span class="op">.</span><span class="fu">poke</span><span class="op">(</span><span class="kw">false</span><span class="op">.</span>B<span class="op">)</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>      dut<span class="op">.</span>clock<span class="op">.</span><span class="fu">step</span><span class="op">(</span><span class="dv">2</span><span class="op">)</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>      dut<span class="op">.</span>slot_io<span class="op">.</span>rd_data<span class="op">.</span><span class="fu">expect</span><span class="op">(</span><span class="fl">0.</span>U<span class="op">)</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</div>
+</div>
 </section>
-<section id="and-much-more" class="slide level2">
-<h2>And much more</h2>
+
+<section>
+<section id="idiomatic-chisel" class="title-slide slide level1">
+<h1>Idiomatic Chisel</h1>
+<p>Verilog can be simply mapped to Chisel, but such Chisel code is not
+idiomatic/optimal</p>
+</section>
+<section id="chisel3.util.counter" class="slide level2">
+<h2><code>chisel3.util.Counter</code></h2>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> <span class="op">(</span>count<span class="op">:</span> UInt<span class="op">,</span> wrap<span class="op">:</span> Bool<span class="op">)</span> <span class="op">=</span> <span class="fu">Counter</span><span class="op">(</span><span class="dv">0</span> until <span class="dv">40000</span><span class="op">,</span> enabled<span class="op">,</span> reset<span class="op">)</span></span></code></pre></div>
+</section>
+<section id="more-high-level-constructs" class="slide level2">
+<h2>More high level constructs</h2>
 <ul>
 <li><code>DecoupledIO</code> bundle with ready-valid interface</li>
 <li><code>UIntToOH</code> &amp; <code>OHToUInt</code> for one-hot
@@ -671,128 +772,116 @@ encoding/decoding</li>
 href="https://github.com/freechipsproject/chisel-cheatsheet/blob/master/chisel_cheatsheet-3.6.pdf">Chisel
 cheatsheet</a></li>
 </ul>
-</section></section>
-<section>
-<section id="idiomatic-chisel" class="title-slide slide level1">
-<h1>Idiomatic Chisel</h1>
-<p>As we saw, Verilog can be simply mapped to Chisel, but such Chisel
-code is not idiomatic/optimal. So after rewrite was done it was time to
-fix this too.</p>
 </section>
 <section id="directly-connecting-instances" class="slide level2">
 <h2>Directly connecting instances</h2>
 <p>In Chisel you can connect instances directly without intermediate
 wires:</p>
-<div class="sourceCode" id="cb18"><pre
-class="sourceCode diff"><code class="sourceCode diff"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="st">-  val w = Wire(Bool())</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>val m1 = Module(M1())</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="st">-  m1.w &lt;&gt; w</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>val m2 = Module(M2())</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="st">-  m2.w &lt;&gt; w</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="va">+  m1.w &lt;&gt; m2.w</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode diff"><code class="sourceCode diff"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="st">-  val w = Wire(Bool())</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>val m1 = Module(M1())</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="st">-  m1.w &lt;&gt; w</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>val m2 = Module(M2())</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="st">-  m2.w &lt;&gt; w</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="va">+  m1.w &lt;&gt; m2.w</span></span></code></pre></div>
 </section>
 <section id="using-bundle-for-common-ports" class="slide level2">
 <h2>Using <code>Bundle</code> for common ports</h2>
-<div class="sourceCode" id="cb19"><pre
-class="sourceCode scala"><code class="sourceCode scala"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">// FPro bus (consumer viewpoint)</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> FPRO <span class="kw">extends</span> Bundle <span class="op">{</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> video_cs <span class="op">=</span> <span class="fu">Input</span><span class="op">(</span><span class="fu">Bool</span><span class="op">())</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> mmio_cs <span class="op">=</span> <span class="fu">Input</span><span class="op">(</span><span class="fu">Bool</span><span class="op">())</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> write <span class="op">=</span> <span class="fu">Input</span><span class="op">(</span><span class="fu">Bool</span><span class="op">())</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> read <span class="op">=</span> <span class="fu">Input</span><span class="op">(</span><span class="fu">Bool</span><span class="op">())</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> addr <span class="op">=</span> <span class="fu">Input</span><span class="op">(</span><span class="fu">UInt</span><span class="op">(</span><span class="fl">21.</span>W<span class="op">))</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> wr_data <span class="op">=</span> <span class="fu">Input</span><span class="op">(</span><span class="fu">UInt</span><span class="op">(</span><span class="fl">32.</span>W<span class="op">))</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> rd_data <span class="op">=</span> <span class="fu">Output</span><span class="op">(</span><span class="fu">UInt</span><span class="op">(</span><span class="fl">32.</span>W<span class="op">))</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">// FPro bus (consumer viewpoint)</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> FPRO <span class="kw">extends</span> Bundle <span class="op">{</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> video_cs <span class="op">=</span> <span class="fu">Input</span><span class="op">(</span><span class="fu">Bool</span><span class="op">())</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> mmio_cs <span class="op">=</span> <span class="fu">Input</span><span class="op">(</span><span class="fu">Bool</span><span class="op">())</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> write <span class="op">=</span> <span class="fu">Input</span><span class="op">(</span><span class="fu">Bool</span><span class="op">())</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> read <span class="op">=</span> <span class="fu">Input</span><span class="op">(</span><span class="fu">Bool</span><span class="op">())</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> addr <span class="op">=</span> <span class="fu">Input</span><span class="op">(</span><span class="fu">UInt</span><span class="op">(</span><span class="fl">21.</span>W<span class="op">))</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> wr_data <span class="op">=</span> <span class="fu">Input</span><span class="op">(</span><span class="fu">UInt</span><span class="op">(</span><span class="fl">32.</span>W<span class="op">))</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> rd_data <span class="op">=</span> <span class="fu">Output</span><span class="op">(</span><span class="fu">UInt</span><span class="op">(</span><span class="fl">32.</span>W<span class="op">))</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="reuse-bundle" class="slide level2">
 <h2>Reuse <code>Bundle</code></h2>
-<div class="sourceCode" id="cb20"><pre
-class="sourceCode scala"><code class="sourceCode scala"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">// this module consumes FPRO signals</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> mmio_controller <span class="kw">extends</span> Module <span class="op">{</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> fp <span class="op">=</span> <span class="fu">IO</span><span class="op">(</span><span class="fu">FPRO</span><span class="op">())</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> mmio_subsystem <span class="kw">extends</span> Module <span class="op">{</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> fp <span class="op">=</span> <span class="fu">IO</span><span class="op">(</span><span class="fu">FPRO</span><span class="op">())</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> mmioController <span class="op">=</span> <span class="fu">Module</span><span class="op">(</span><span class="kw">new</span> <span class="fu">mmio_controller</span><span class="op">())</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  mmioController<span class="op">.</span>fp <span class="op">&lt;&gt;</span> fp <span class="co">// will connect all wires automatically</span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co">// this module produces FPRO signals</span></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> mcs_bridge <span class="kw">extends</span> Module <span class="op">{</span></span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> fp <span class="op">=</span> <span class="fu">Flipped</span><span class="op">(</span><span class="fu">FPRO</span><span class="op">())</span> <span class="co">// flips Input &lt;-&gt; Output</span></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">// this module produces FPro signals</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> mcs_bridge <span class="kw">extends</span> Module <span class="op">{</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> fp <span class="op">=</span> <span class="fu">Flipped</span><span class="op">(</span><span class="fu">FPRO</span><span class="op">())</span> <span class="co">// flips Input &lt;-&gt; Output</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co">// this module passes down FPro signals</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> mmio_subsystem <span class="kw">extends</span> Module <span class="op">{</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> fp <span class="op">=</span> <span class="fu">IO</span><span class="op">(</span><span class="fu">FPRO</span><span class="op">())</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> mmioController <span class="op">=</span> <span class="fu">Module</span><span class="op">(</span><span class="kw">new</span> <span class="fu">mmio_controller</span><span class="op">())</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  mmioController<span class="op">.</span>fp <span class="op">&lt;&gt;</span> fp <span class="co">// will connect all wires automatically</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="co">// this module consumes FPro signals</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> mmio_controller <span class="kw">extends</span> Module <span class="op">{</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> fp <span class="op">=</span> <span class="fu">IO</span><span class="op">(</span><span class="fu">FPRO</span><span class="op">())</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="using-trait-for-interfaces" class="slide level2">
 <h2>Using <code>trait</code> for interfaces</h2>
-<div class="sourceCode" id="cb21"><pre
-class="sourceCode scala"><code class="sourceCode scala"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">trait</span> MMIO_core <span class="op">{</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> slot_io <span class="op">=</span> <span class="fu">IO</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Slot</span><span class="op">())</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> GPI <span class="kw">extends</span> Module <span class="kw">with</span> MMIO_core <span class="op">{</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// implicit slot_io inherited from trait</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// val slot_io = IO(new Slot())</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> GPO <span class="kw">extends</span> Module <span class="kw">with</span> MMIO_core <span class="op">{</span></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">// val slot_io = IO(new Slot())</span></span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">// define common interface for MMIO core</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="kw">trait</span> MMIO_core <span class="op">{</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">val</span> slot_io <span class="op">=</span> <span class="fu">IO</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Slot</span><span class="op">())</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> GPI <span class="kw">extends</span> Module <span class="kw">with</span> MMIO_core <span class="op">{</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// implicit slot_io inherited from trait</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// val slot_io = IO(new Slot())</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> GPO <span class="kw">extends</span> Module <span class="kw">with</span> MMIO_core <span class="op">{</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">// val slot_io = IO(new Slot())</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
-<section id="this-allows-dynamic-core-connections" class="slide level2">
-<h2>This allows dynamic core connections</h2>
-<div class="sourceCode" id="cb22"><pre
-class="sourceCode scala"><code class="sourceCode scala"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> slots<span class="op">:</span> <span class="ex">Array</span><span class="op">[</span>MMIO_core<span class="op">]</span> <span class="op">=</span> <span class="ex">Array</span><span class="op">()</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Instantiate the GPO (General Purpose Output)</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> gpo <span class="op">=</span> <span class="fu">Module</span><span class="op">(</span><span class="kw">new</span> <span class="fu">GPO</span><span class="op">())</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>gpo<span class="op">.</span>io<span class="op">.</span>data_out <span class="op">&lt;&gt;</span> io<span class="op">.</span>data_out</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>slots <span class="op">:+=</span> gpo <span class="co">// append to array</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">// Instantiate the GPI (General Purpose Input)</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> gpi <span class="op">=</span> <span class="fu">Module</span><span class="op">(</span><span class="kw">new</span> <span class="fu">GPI</span><span class="op">())</span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>gpi<span class="op">.</span>io<span class="op">.</span>data_in <span class="op">&lt;&gt;</span> io<span class="op">.</span>data_in</span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>slots <span class="op">:+=</span> gpi</span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span><span class="op">(</span>slots<span class="op">.</span>length <span class="op">&lt;</span> <span class="dv">64</span><span class="op">)</span></span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">((</span>core<span class="op">,</span> i<span class="op">)</span> <span class="op">&lt;-</span> slots<span class="op">.</span>zipWithIndex<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>  core<span class="op">.</span>slot_io<span class="op">.</span>address <span class="op">&lt;&gt;</span> slot<span class="op">.</span><span class="fu">reg_addr</span><span class="op">(</span>i<span class="op">)</span></span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>  core<span class="op">.</span>slot_io<span class="op">.</span>rd_data <span class="op">&lt;&gt;</span> slot<span class="op">.</span><span class="fu">read_data</span><span class="op">(</span>i<span class="op">)</span></span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>  core<span class="op">.</span>slot_io<span class="op">.</span>wr_data <span class="op">&lt;&gt;</span> slot<span class="op">.</span><span class="fu">write_data</span><span class="op">(</span>i<span class="op">)</span></span>
-<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>  core<span class="op">.</span>slot_io<span class="op">.</span>read <span class="op">&lt;&gt;</span> slot<span class="op">.</span><span class="fu">read</span><span class="op">(</span>i<span class="op">)</span></span>
-<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>  core<span class="op">.</span>slot_io<span class="op">.</span>write <span class="op">&lt;&gt;</span> slot<span class="op">.</span><span class="fu">write</span><span class="op">(</span>i<span class="op">)</span></span>
-<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>  core<span class="op">.</span>slot_io<span class="op">.</span>cs <span class="op">&lt;&gt;</span> slot<span class="op">.</span><span class="fu">cs</span><span class="op">(</span>i<span class="op">)</span></span>
-<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<section id="for-easier-core-additions" class="slide level2">
+<h2>for easier core additions</h2>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode scala"><code class="sourceCode scala"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> slots<span class="op">:</span> <span class="ex">Array</span><span class="op">[</span>MMIO_core<span class="op">]</span> <span class="op">=</span> <span class="ex">Array</span><span class="op">()</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Instantiate the GPO (General Purpose Output)</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> gpo <span class="op">=</span> <span class="fu">Module</span><span class="op">(</span><span class="kw">new</span> <span class="fu">GPO</span><span class="op">())</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>gpo<span class="op">.</span>io<span class="op">.</span>data_out <span class="op">&lt;&gt;</span> io<span class="op">.</span>data_out</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>slots <span class="op">:+=</span> gpo <span class="co">// append to array</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co">// Instantiate the GPI (General Purpose Input)</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="kw">val</span> gpi <span class="op">=</span> <span class="fu">Module</span><span class="op">(</span><span class="kw">new</span> <span class="fu">GPI</span><span class="op">())</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>gpi<span class="op">.</span>io<span class="op">.</span>data_in <span class="op">&lt;&gt;</span> io<span class="op">.</span>data_in</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>slots <span class="op">:+=</span> gpi</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span><span class="op">(</span>slots<span class="op">.</span>length <span class="op">&lt;</span> <span class="dv">64</span><span class="op">)</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">((</span>core<span class="op">,</span> i<span class="op">)</span> <span class="op">&lt;-</span> slots<span class="op">.</span>zipWithIndex<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>  core<span class="op">.</span>slot_io<span class="op">.</span>address <span class="op">&lt;&gt;</span> <span class="fu">reg_addr</span><span class="op">(</span>i<span class="op">)</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>  core<span class="op">.</span>slot_io<span class="op">.</span>rd_data <span class="op">&lt;&gt;</span> <span class="fu">read_data</span><span class="op">(</span>i<span class="op">)</span></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>  core<span class="op">.</span>slot_io<span class="op">.</span>wr_data <span class="op">&lt;&gt;</span> <span class="fu">write_data</span><span class="op">(</span>i<span class="op">)</span></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>  core<span class="op">.</span>slot_io<span class="op">.</span>read <span class="op">&lt;&gt;</span> <span class="fu">read</span><span class="op">(</span>i<span class="op">)</span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>  core<span class="op">.</span>slot_io<span class="op">.</span>write <span class="op">&lt;&gt;</span> <span class="fu">write</span><span class="op">(</span>i<span class="op">)</span></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>  core<span class="op">.</span>slot_io<span class="op">.</span>cs <span class="op">&lt;&gt;</span> <span class="fu">cs</span><span class="op">(</span>i<span class="op">)</span></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section></section>
-<section id="known-chisel-problems" class="title-slide slide level1">
-<h1>Known chisel problems</h1>
-<ul>
-<li>some stuff is badly documented</li>
-<li>unpacked array not supported, but we can use <a
-href="https://verificationguide.com/systemverilog/systemverilog-packed-and-unpacked-array/">packed
-arrays</a> that only require magic options (again bad docs)
-<code>scalarize-ext-modules</code></li>
-<li>sizes are not really typed (they are checked in elaboration
-process)</li>
-<li>feature not a bug: all ports/wires need to be connected, one can use
-<code>DontCare</code></li>
-</ul>
+<section id="more-details-in-github-repo"
+class="title-slide slide level1">
+<h1>More details in GitHub repo</h1>
+<p><a href="https://github.com/schtrudl/cpro"
+class="uri">https://github.com/schtrudl/cpro</a></p>
 </section>
 
-<section id="know-vivaldo-problems" class="title-slide slide level1">
-<h1>Know Vivaldo problems</h1>
+<section id="discovered-vivaldo-problems"
+class="title-slide slide level1">
+<h1>Discovered Vivaldo problems</h1>
 <ul>
 <li>associate ELF does not work correctly if MCS is not in top
 module</li>
